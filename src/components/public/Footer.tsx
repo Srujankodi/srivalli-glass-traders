@@ -9,7 +9,7 @@ export default function PublicFooter() {
   const [phone, setPhone] = useState('+91 98765 43210');
   const [email, setEmail] = useState('contact@srivalliglasstraders.com');
   const [whatsapp, setWhatsapp] = useState('+919876543210');
-  const [gstin, setGstin] = useState('36AAAAA0000A1Z5');
+  const [gstin, setGstin] = useState('36DRUPS5127N2ZQ');
   const [businessHours, setBusinessHours] = useState('Mon - Sat: 9:00 AM - 8:30 PM | Sunday: 10:00 AM - 3:00 PM');
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function PublicFooter() {
           if (s.phone) setPhone(s.phone);
           if (s.email) setEmail(s.email);
           if (s.whatsapp) setWhatsapp(s.whatsapp);
-          if (s.gstin) setGstin(s.gstin);
+          if (s.gstin) setGstin(s.gstin.toUpperCase());
           if (s.businessHours) setBusinessHours(s.businessHours);
         }
       })
@@ -59,7 +59,7 @@ export default function PublicFooter() {
 
             <div className="pt-2">
               <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-red-950/60 text-red-300 border border-red-800/50">
-                <span>GSTIN: {gstin}</span>
+                <span>GSTIN: <strong className="font-mono uppercase font-black text-white">{gstin ? gstin.toUpperCase() : '36DRUPS5127N2ZQ'}</strong></span>
                 <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
                 <span>Telangana Intra-State</span>
               </span>

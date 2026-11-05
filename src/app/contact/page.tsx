@@ -15,7 +15,7 @@ export default function ContactPage() {
   const [companyPhone, setCompanyPhone] = useState('+91 98765 43210');
   const [companyEmail, setCompanyEmail] = useState('contact@srivalliglasstraders.com');
   const [companyHours, setCompanyHours] = useState('Monday – Saturday: 9:00 AM – 8:30 PM | Sunday: 10:00 AM – 3:00 PM');
-  const [companyGstin, setCompanyGstin] = useState('36AAAAA0000A1Z5');
+  const [companyGstin, setCompanyGstin] = useState('36DRUPS5127N2ZQ');
 
   useEffect(() => {
     fetch('/api/settings')
@@ -27,7 +27,7 @@ export default function ContactPage() {
           if (s.phone) setCompanyPhone(s.phone);
           if (s.email) setCompanyEmail(s.email);
           if (s.businessHours) setCompanyHours(s.businessHours);
-          if (s.gstin) setCompanyGstin(s.gstin);
+          if (s.gstin) setCompanyGstin(s.gstin.toUpperCase());
         }
       })
       .catch((e) => console.error(e));
@@ -130,7 +130,7 @@ export default function ContactPage() {
 
                 <div className="pt-2">
                   <span className="inline-block px-4 py-2 rounded-2xl text-xs sm:text-sm font-bold bg-white border border-slate-200 text-slate-800 shadow-xs">
-                    GSTIN: <strong className="text-[#8B1E2D]">{companyGstin}</strong> (Telangana)
+                    GSTIN: <strong className="text-[#8B1E2D] font-mono uppercase font-black">{companyGstin ? companyGstin.toUpperCase() : '36DRUPS5127N2ZQ'}</strong> (Telangana)
                   </span>
                 </div>
               </div>

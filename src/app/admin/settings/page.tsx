@@ -21,7 +21,7 @@ export default function AdminSettingsPage() {
   const [email, setEmail] = useState('contact@srivalliglasstraders.com');
   const [whatsapp, setWhatsapp] = useState('+919876543210');
   const [businessHours, setBusinessHours] = useState('Mon - Sat: 9:00 AM - 8:30 PM | Sunday: 10:00 AM - 3:00 PM');
-  const [gstin, setGstin] = useState('36AAAAA0000A1Z5');
+  const [gstin, setGstin] = useState('36DRUPS5127N2ZQ');
   const [stateCode, setStateCode] = useState('36');
   const [defaultGstRate, setDefaultGstRate] = useState('18.0');
   const [cuttingLossMm, setCuttingLossMm] = useState('3.0');
@@ -43,7 +43,7 @@ export default function AdminSettingsPage() {
           if (s.email) setEmail(s.email);
           if (s.whatsapp) setWhatsapp(s.whatsapp);
           if (s.businessHours) setBusinessHours(s.businessHours);
-          if (s.gstin) setGstin(s.gstin);
+          if (s.gstin) setGstin(s.gstin.toUpperCase());
           if (s.stateCode) setStateCode(s.stateCode);
           if (s.defaultGstRate) setDefaultGstRate(String(s.defaultGstRate));
           if (s.cuttingLossMm) setCuttingLossMm(String(s.cuttingLossMm));
@@ -68,7 +68,7 @@ export default function AdminSettingsPage() {
           email,
           whatsapp,
           businessHours,
-          gstin,
+          gstin: gstin.toUpperCase(),
           stateCode,
           defaultGstRate: parseFloat(defaultGstRate),
           cuttingLossMm: parseFloat(cuttingLossMm),
@@ -206,8 +206,8 @@ export default function AdminSettingsPage() {
               <input
                 type="text"
                 value={gstin}
-                onChange={(e) => setGstin(e.target.value)}
-                className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 font-bold uppercase focus:outline-none focus:border-[#8B1E2D]"
+                onChange={(e) => setGstin(e.target.value.toUpperCase())}
+                className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 font-bold uppercase font-mono focus:outline-none focus:border-[#8B1E2D]"
               />
             </div>
             <div>

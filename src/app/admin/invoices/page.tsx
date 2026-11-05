@@ -203,7 +203,7 @@ export default function InvoicesPage() {
                 <h2 className="text-2xl font-extrabold text-slate-900 mt-2">Srivalli Glass Traders</h2>
                 <p className="text-xs text-slate-600 max-w-sm mt-1">
                   Shop No. 4, Plot 12, Glass Market, Hyderabad, Telangana 500001<br />
-                  GSTIN: <strong>36AAAAA0000A1Z5</strong> &bull; State Code: 36 (Telangana)<br />
+                  GSTIN: <strong>36DRUPS5127N2ZQ</strong> &bull; State Code: 36 (Telangana)<br />
                   Phone: +91 98765 43210 &bull; Email: contact@srivalliglasstraders.com
                 </p>
               </div>

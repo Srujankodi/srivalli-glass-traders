@@ -167,7 +167,9 @@ export default function HomePage() {
                 </p>
                 
                 <div className="pt-2 border-t border-slate-200/80 flex items-center justify-between">
-                  <span className="text-xs font-bold text-slate-700">Telangana GST Invoicing</span>
+                  <span className="text-xs font-bold text-slate-700">
+                    Telangana GST: <strong className="font-mono uppercase font-black text-[#8B1E2D]">36DRUPS5127N2ZQ</strong>
+                  </span>
                   <Link
                     href="/products"
                     className="text-xs font-extrabold text-[#8B1E2D] hover:underline flex items-center gap-1"

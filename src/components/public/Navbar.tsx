@@ -9,6 +9,7 @@ export default function PublicNavbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [phone, setPhone] = useState('+91 98765 43210');
   const [whatsapp, setWhatsapp] = useState('+919876543210');
+  const [gstin, setGstin] = useState('36DRUPS5127N2ZQ');
   const pathname = usePathname();
 
   useEffect(() => {
@@ -18,6 +19,7 @@ export default function PublicNavbar() {
         if (data.settings) {
           if (data.settings.phone) setPhone(data.settings.phone);
           if (data.settings.whatsapp) setWhatsapp(data.settings.whatsapp);
+          if (data.settings.gstin) setGstin(data.settings.gstin.toUpperCase());
         }
       })
       .catch((e) => console.error(e));
@@ -108,7 +110,11 @@ export default function PublicNavbar() {
         </div>
 
         {/* Secondary Sub-link Bar (just like MORE | ADMISSIONS | CBSE in screenshot) */}
-        <div className="hidden lg:flex items-center justify-end gap-6 py-1.5 border-t border-slate-100 text-[11px] font-bold tracking-wider text-slate-500 uppercase">
+        <div className="hidden lg:flex items-center justify-end gap-5 py-1.5 border-t border-slate-100 text-[11px] font-bold tracking-wider text-slate-500 uppercase">
+          <span className="font-mono font-extrabold text-[#8B1E2D]">
+            GSTIN: {gstin ? gstin.toUpperCase() : '36DRUPS5127N2ZQ'}
+          </span>
+          <span className="text-slate-300">&bull;</span>
           <Link href="/products" className="text-[#8B1E2D] hover:underline font-extrabold">
             WHOLESALE SOURCING
           </Link>
@@ -146,6 +152,9 @@ export default function PublicNavbar() {
             ))}
           </nav>
           <div className="pt-3 border-t border-slate-100 flex flex-col gap-2">
+            <div className="px-3 py-1.5 rounded-lg text-xs font-mono font-black text-[#8B1E2D] bg-red-50 border border-red-200 text-center tracking-wider">
+              GSTIN: {gstin ? gstin.toUpperCase() : '36DRUPS5127N2ZQ'}
+            </div>
             <a
               href={`tel:${phone.replace(/[^0-9+]/g, '')}`}
               className="flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-bold bg-slate-100 text-slate-900"

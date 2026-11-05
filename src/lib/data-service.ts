@@ -52,7 +52,7 @@ function getInitialDatabaseState(): AppDatabase {
       email: 'contact@srivalliglasstraders.com',
       whatsapp: '+919876543210',
       businessHours: 'Mon - Sat: 9:00 AM - 8:30 PM | Sunday: 10:00 AM - 3:00 PM',
-      gstin: '36AAAAA0000A1Z5',
+      gstin: '36DRUPS5127N2ZQ',
       stateCode: '36',
       stateName: 'Telangana',
       defaultGstRate: 18.0,
@@ -912,7 +912,11 @@ export class DataService {
 
   static updateSettings(newSettings: any) {
     const db = this.getDB();
-    db.settings = { ...db.settings, ...newSettings, updatedAt: new Date().toISOString() };
+    const sanitized = { ...newSettings };
+    if (sanitized.gstin) {
+      sanitized.gstin = String(sanitized.gstin).trim().toUpperCase();
+    }
+    db.settings = { ...db.settings, ...sanitized, updatedAt: new Date().toISOString() };
     this.saveDB(db);
     return db.settings;
   }
