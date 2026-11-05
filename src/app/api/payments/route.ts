@@ -15,3 +15,4 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: err.message || 'Error recording payment' }, { status: 500 });
   }
 }
+

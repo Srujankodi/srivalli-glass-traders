@@ -1,5 +1,5 @@
 /**
- * Sri Valli Glass Traders - Enterprise Data & Persistence Service
+ * Srivalli Glass Traders - Enterprise Data & Persistence Service
  * Hyderabad, Telangana, India
  * 
  * Provides unified, transactional CRUD operations with automatic
@@ -45,7 +45,7 @@ function getInitialDatabaseState(): AppDatabase {
   return {
     settings: {
       id: 'cfg-001',
-      companyName: 'Sri Valli Glass Traders',
+      companyName: 'Srivalli Glass Traders',
       tagline: 'Quality Glass Solutions at Competitive Prices',
       address: 'Shop No. 4, Plot 12, Glass Market, Hyderabad, Telangana 500001',
       phone: '+91 98765 43210',
@@ -874,7 +874,7 @@ function getInitialDatabaseState(): AppDatabase {
         action: 'SYSTEM_INITIALIZED',
         entityType: 'System',
         entityId: 'cfg-001',
-        details: 'Sri Valli Glass Traders ERP system initialized.',
+        details: 'Srivalli Glass Traders ERP system initialized.',
         createdAt: new Date().toISOString(),
       },
     ],
@@ -1506,3 +1506,4 @@ export class DataService {
     };
   }
 }
+

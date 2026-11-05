@@ -122,3 +122,4 @@ test('8. Cutting from existing remnant: secondary remnant generation', () => {
   assert.strictEqual(result.remnants.length, 1);
   assert.ok(result.remnants[0].areaSqFt >= 7.0);
 });
+

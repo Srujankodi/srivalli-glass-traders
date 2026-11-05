@@ -16,7 +16,7 @@ export default function AboutPage() {
             About Our Enterprise
           </span>
           <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">
-            Sri Valli Glass Traders
+            Srivalli Glass Traders
           </h1>
           <p className="text-slate-300 max-w-2xl mx-auto text-base sm:text-lg">
             Dedicated glass trading and custom sizing operations located in Hyderabad, Telangana.
@@ -35,7 +35,7 @@ export default function AboutPage() {
               <span>What We Do</span>
             </h2>
             <p className="text-slate-300 leading-relaxed text-sm sm:text-base">
-              Sri Valli Glass Traders is an established commercial glass trading enterprise operating in Hyderabad. 
+              Srivalli Glass Traders is an established commercial glass trading enterprise operating in Hyderabad. 
               We procure prime architectural glass sheets in jumbo and standard dimensions from leading glass manufacturers 
               and wholesale suppliers, supplying them in custom cuts and full sheets to contractors, builders, interior designers, 
               dealers, and retail homeowners.
@@ -152,3 +152,4 @@ export default function AboutPage() {
     </div>
   );
 }
+

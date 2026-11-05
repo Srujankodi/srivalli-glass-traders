@@ -88,3 +88,4 @@ test('4. Price Calculation with GST, Cutting & Transport charges', () => {
   assert.strictEqual(result.totalTax, 936);
   assert.strictEqual(result.grandTotal, 6136);
 });
+

@@ -1,4 +1,4 @@
-// Prisma Schema for Sri Valli Glass Traders ERP & Customer Website
+// Prisma Schema for Srivalli Glass Traders ERP & Customer Website
 // Database: PostgreSQL with high-precision decimal & relational integrity
 
 generator client {
@@ -134,7 +134,7 @@ model User {
 
 model BusinessSettings {
   id                  String   @id @default(uuid())
-  companyName         String   @default("Sri Valli Glass Traders")
+  companyName         String   @default("Srivalli Glass Traders")
   tagline             String   @default("Quality Glass Solutions at Competitive Prices")
   address             String   @default("Shop No. 4, Plot 12, Glass Market, Hyderabad, Telangana 500001")
   phone               String   @default("+91 98765 43210")
@@ -645,3 +645,4 @@ model AuditLog {
 
   user       User?    @relation(fields: [userId], references: [id])
 }
+

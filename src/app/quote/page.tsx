@@ -105,7 +105,7 @@ function QuoteContent() {
               Quotation Request Submitted!
             </h2>
             <p className="text-sm text-slate-300">
-              Thank you, <strong className="text-white">{customerName}</strong>. Your inquiry has been received by Sri Valli Glass Traders.
+              Thank you, <strong className="text-white">{customerName}</strong>. Your inquiry has been received by Srivalli Glass Traders.
             </p>
           </div>
 
@@ -132,7 +132,7 @@ function QuoteContent() {
 
           <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
-              href={`https://wa.me/919876543210?text=Hello%20Sri%20Valli%20Glass,%20I%20have%20submitted%20inquiry%20${submittedLead.referenceNumber}%20for%20${glassType}%20(${submittedLead.estimatedSqFt}%20sq%20ft).%20Please%20share%20quotation.`}
+              href={`https://wa.me/919876543210?text=Hello%20Srivalli%20Glass,%20I%20have%20submitted%20inquiry%20${submittedLead.referenceNumber}%20for%20${glassType}%20(${submittedLead.estimatedSqFt}%20sq%20ft).%20Please%20share%20quotation.`}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto px-6 py-3 rounded-xl text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white flex items-center justify-center gap-2 shadow-sm transition-all"
@@ -396,7 +396,7 @@ function QuoteContent() {
                 <p className="text-[11px] text-slate-400">Send dimensions directly via WhatsApp</p>
               </div>
               <a
-                href="https://wa.me/919876543210?text=Hello%20Sri%20Valli%20Glass%20Traders,%20I%20need%20a%20quote%20for%20custom%20glass"
+                href="https://wa.me/919876543210?text=Hello%20Srivalli%20Glass%20Traders,%20I%20need%20a%20quote%20for%20custom%20glass"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-3.5 py-2 rounded-xl text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white flex items-center gap-1.5 transition-colors"

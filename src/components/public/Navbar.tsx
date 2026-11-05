@@ -29,7 +29,7 @@ export default function PublicNavbar() {
             </div>
             <div>
               <span className="text-xl font-bold tracking-tight text-white flex items-center gap-1.5">
-                Sri Valli <span className="text-brand-tealGlow">Glass</span> Traders
+                Srivalli <span className="text-brand-tealGlow">Glass</span> Traders
               </span>
               <p className="text-xs text-brand-silver/70">Hyderabad &bull; Quality &bull; Wholesale & Custom</p>
             </div>
@@ -145,3 +145,4 @@ export default function PublicNavbar() {
     </header>
   );
 }
+

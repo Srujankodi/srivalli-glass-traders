@@ -42,7 +42,7 @@ export default function HomePage() {
               </div>
 
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight">
-                Sri Valli <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-tealGlow to-teal-300">Glass Traders</span>
+                Srivalli <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-tealGlow to-teal-300">Glass Traders</span>
               </h1>
 
               <p className="text-xl text-teal-100/90 font-medium">
@@ -247,7 +247,7 @@ export default function HomePage() {
               Business Strengths
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-white">
-              Why Choose Sri Valli Glass Traders
+              Why Choose Srivalli Glass Traders
             </h2>
             <p className="text-slate-400 text-sm sm:text-base">
               Delivering accurate glass sizes, transparent square-foot rates, and responsive customer service for Hyderabad builders, designers, and home owners.
@@ -354,3 +354,4 @@ export default function HomePage() {
     </div>
   );
 }
+

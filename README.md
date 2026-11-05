@@ -1,4 +1,4 @@
-# Sri Valli Glass Traders — Full-Stack Glass Trading ERP & Customer Website
+# Srivalli Glass Traders — Full-Stack Glass Trading ERP & Customer Website
 
 > **Location:** Hyderabad, Telangana, India  
 > **Industry:** Architectural Glass Trading & Building Materials  
@@ -9,7 +9,7 @@
 
 ## 1. Project Overview & Business Background
 
-**Sri Valli Glass Traders** is an actual commercial glass trading and processing enterprise based in Hyderabad, Telangana. The business operates across two interconnected domains:
+**Srivalli Glass Traders** is an actual commercial glass trading and processing enterprise based in Hyderabad, Telangana. The business operates across two interconnected domains:
 
 1. **Wholesale Sourcing & Physical Stock Management**: Purchasing standard and jumbo sheets ($10\text{ ft} \times 8\text{ ft}$, $12\text{ ft} \times 8\text{ ft}$, etc.) from wholesale float manufacturers and regional tempering plants.
 2. **Customer Order Fulfillment & Precision Cutting**: Supplying custom-dimension glass to residential clients, builders, interior designers, and contractors, while salvaging usable offcut remnants and monetizing scrap cullet.
@@ -142,5 +142,6 @@ git commit -m "test: add automated unit tests for cutting feasibility, landed co
 
 ## 8. License & Attribution
 
-Designed and developed for **Sri Valli Glass Traders**, Hyderabad, Telangana, India.  
+Designed and developed for **Srivalli Glass Traders**, Hyderabad, Telangana, India.  
 Enterprise Project developed in compliance with Bytecode Trainings specifications.
+

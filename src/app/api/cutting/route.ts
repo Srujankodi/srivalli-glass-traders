@@ -95,3 +95,4 @@ export async function GET() {
   const jobs = DataService.getCuttingJobs();
   return NextResponse.json({ jobs });
 }
+

@@ -60,7 +60,7 @@ export default function LoginPage() {
               <Layers className="w-5 h-5 text-brand-tealGlow" />
             </div>
             <span className="text-xl font-bold tracking-tight text-white">
-              Sri Valli <span className="text-brand-tealGlow">Glass</span>
+              Srivalli <span className="text-brand-tealGlow">Glass</span>
             </span>
           </Link>
           <h1 className="text-2xl font-extrabold text-white">Internal Business Portal</h1>
@@ -172,3 +172,4 @@ export default function LoginPage() {
     </div>
   );
 }
+

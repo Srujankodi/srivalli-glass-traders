@@ -1,6 +1,6 @@
 /**
  * Smart Remnant and Stock Matcher
- * Sri Valli Glass Traders - Hyderabad, Telangana
+ * Srivalli Glass Traders - Hyderabad, Telangana
  * 
  * Automatically matches customer requested dimensions against:
  * 1. Reusable Remnant Inventory (Max waste reduction priority)
@@ -181,3 +181,4 @@ export function findOptimalStockMatch(
 
   return recommendations;
 }
+

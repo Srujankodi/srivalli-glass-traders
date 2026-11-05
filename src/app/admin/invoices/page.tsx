@@ -200,7 +200,7 @@ export default function InvoicesPage() {
                 <span className="px-2.5 py-1 rounded bg-teal-50 text-teal-800 text-[11px] font-bold tracking-wider uppercase">
                   TAX INVOICE
                 </span>
-                <h2 className="text-2xl font-extrabold text-slate-900 mt-2">Sri Valli Glass Traders</h2>
+                <h2 className="text-2xl font-extrabold text-slate-900 mt-2">Srivalli Glass Traders</h2>
                 <p className="text-xs text-slate-600 max-w-sm mt-1">
                   Shop No. 4, Plot 12, Glass Market, Hyderabad, Telangana 500001<br />
                   GSTIN: <strong>36AAAAA0000A1Z5</strong> &bull; State Code: 36 (Telangana)<br />
@@ -324,7 +324,7 @@ export default function InvoicesPage() {
             {/* Footer Notice & Print Button */}
             <div className="border-t pt-4 flex items-center justify-between">
               <span className="text-[11px] text-slate-500">
-                Authorized Signatory &bull; Sri Valli Glass Traders, Hyderabad
+                Authorized Signatory &bull; Srivalli Glass Traders, Hyderabad
               </span>
               <button
                 onClick={() => window.print()}
@@ -453,3 +453,4 @@ export default function InvoicesPage() {
     </div>
   );
 }
+

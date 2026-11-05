@@ -27,7 +27,7 @@ export default function ContactPage() {
             Visit or Call Us
           </span>
           <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">
-            Contact Sri Valli Glass Traders
+            Contact Srivalli Glass Traders
           </h1>
           <p className="text-slate-300 max-w-2xl mx-auto text-sm sm:text-base">
             Reach out for wholesale glass sheets, custom residential glass cuts, or onsite commercial project consultations in Hyderabad.
@@ -195,3 +195,4 @@ export default function ContactPage() {
     </div>
   );
 }
+

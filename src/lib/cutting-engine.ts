@@ -1,6 +1,6 @@
 /**
  * Smart 2D Glass Cutting Engine
- * Sri Valli Glass Traders - Hyderabad, Telangana
+ * Srivalli Glass Traders - Hyderabad, Telangana
  * 
  * Computes exact guillotine cuts, kerf allowance, physical fit,
  * remnant classification, scrap generation, and visual layout coordinates.
@@ -306,3 +306,4 @@ export function evaluateCuttingFeasibility(
     layoutBoxes,
   };
 }
+

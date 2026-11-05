@@ -1,6 +1,6 @@
 /**
  * Domain-Specific Glass Calculation Engine
- * Sri Valli Glass Traders - Hyderabad, Telangana
+ * Srivalli Glass Traders - Hyderabad, Telangana
  * 
  * Handles dimension conversions, exact square footage calculations,
  * pricing with cutting charges, transport, GST, and landed costs.
@@ -192,3 +192,4 @@ export function formatINR(amount: number): string {
     minimumFractionDigits: 2,
   }).format(amount);
 }
+

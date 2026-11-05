@@ -18,7 +18,7 @@ export default function AdminHeader() {
       {/* Title / Context */}
       <div className="flex items-center space-x-3">
         <h1 className="text-sm font-bold text-white tracking-wide uppercase">
-          Sri Valli Glass Traders &bull; Hyderabad ERP
+          Srivalli Glass Traders &bull; Hyderabad ERP
         </h1>
         <span className="hidden sm:inline-block px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
           Live Database Active
@@ -72,3 +72,4 @@ export default function AdminHeader() {
     </header>
   );
 }
+

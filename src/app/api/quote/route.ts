@@ -64,3 +64,4 @@ export async function GET() {
   const leads = DataService.getCRMLeads();
   return NextResponse.json({ leads });
 }
+

@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 
 export default function AdminSettingsPage() {
-  const [companyName, setCompanyName] = useState('Sri Valli Glass Traders');
+  const [companyName, setCompanyName] = useState('Srivalli Glass Traders');
   const [tagline, setTagline] = useState('Quality Glass Solutions at Competitive Prices');
   const [address, setAddress] = useState('Shop No. 4, Plot 12, Glass Market, Hyderabad, Telangana 500001');
   const [phone, setPhone] = useState('+91 98765 43210');
@@ -236,3 +236,4 @@ export default function AdminSettingsPage() {
     </div>
   );
 }
+

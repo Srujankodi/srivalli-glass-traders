@@ -54,3 +54,4 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: err.message || 'Error processing inventory request' }, { status: 500 });
   }
 }
+

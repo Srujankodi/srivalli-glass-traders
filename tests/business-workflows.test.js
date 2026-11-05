@@ -85,3 +85,4 @@ test('13. Workflow E: Financial Engine (Gross and Net Profit formulas)', () => {
   assert.strictEqual(netProfit, 40000);
   assert.strictEqual(Math.round(netProfitMargin * 10) / 10, 26.7);
 });
+

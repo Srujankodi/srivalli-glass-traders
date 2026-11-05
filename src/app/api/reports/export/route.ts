@@ -77,3 +77,4 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: err.message || 'Error generating report' }, { status: 500 });
   }
 }
+

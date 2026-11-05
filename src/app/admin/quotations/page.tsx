@@ -129,7 +129,7 @@ function QuotationsContent() {
             </thead>
             <tbody className="divide-y divide-white/5">
               {quotations.map((q) => {
-                const whatsappText = `Hello ${q.customerName || 'Customer'}, here is your quotation from *Sri Valli Glass Traders, Hyderabad*:\n\n*Quote No:* ${q.quoteNumber}\n*Total Area:* ${q.items?.[0]?.totalSqFt || 48} sq ft\n*Material:* ${q.items?.[0]?.glassType || 'Glass'}\n*Estimate Total:* ₹${q.totalAmount.toLocaleString('en-IN')}\n\nValid for 15 days. Please reply to confirm!`;
+                const whatsappText = `Hello ${q.customerName || 'Customer'}, here is your quotation from *Srivalli Glass Traders, Hyderabad*:\n\n*Quote No:* ${q.quoteNumber}\n*Total Area:* ${q.items?.[0]?.totalSqFt || 48} sq ft\n*Material:* ${q.items?.[0]?.glassType || 'Glass'}\n*Estimate Total:* ₹${q.totalAmount.toLocaleString('en-IN')}\n\nValid for 15 days. Please reply to confirm!`;
                 return (
                   <tr key={q.id} className="hover:bg-white/5 text-slate-300">
                     <td className="p-3 font-mono font-bold text-teal-300">{q.quoteNumber}</td>

@@ -15,7 +15,7 @@ export default function PublicFooter() {
                 <Layers className="w-5 h-5 text-brand-tealGlow" />
               </div>
               <span className="text-xl font-bold tracking-tight text-white">
-                Sri Valli <span className="text-brand-tealGlow">Glass</span>
+                Srivalli <span className="text-brand-tealGlow">Glass</span>
               </span>
             </div>
             <p className="text-sm text-brand-muted leading-relaxed">
@@ -116,7 +116,7 @@ export default function PublicFooter() {
 
         {/* Bottom copyright & attribution */}
         <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs text-brand-muted gap-4">
-          <p>&copy; {new Date().getFullYear()} Sri Valli Glass Traders. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Srivalli Glass Traders. All rights reserved.</p>
           <p className="flex items-center gap-1.5">
             Designed for professional glass trading operations in Hyderabad, Telangana.
           </p>
@@ -125,3 +125,4 @@ export default function PublicFooter() {
     </footer>
   );
 }
+

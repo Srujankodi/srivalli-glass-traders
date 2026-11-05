@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Sri Valli Glass Traders | Hyderabad Glass Trading & Cutting Specialists',
-  description: 'Sri Valli Glass Traders - Quality glass solutions at competitive prices in Hyderabad, Telangana. Wholesale float glass, toughened glass, custom cutting, mirrors, and remnants.',
+  title: 'Srivalli Glass Traders | Hyderabad Glass Trading & Cutting Specialists',
+  description: 'Srivalli Glass Traders - Quality glass solutions at competitive prices in Hyderabad, Telangana. Wholesale float glass, toughened glass, custom cutting, mirrors, and remnants.',
   keywords: 'glass traders hyderabad, toughened glass, clear float glass, glass cutting hyderabad, mirror glass, glass suppliers telangana',
 };
 
@@ -20,3 +20,4 @@ export default function RootLayout({
     </html>
   );
 }
+

@@ -1,5 +1,5 @@
 /**
- * Sri Valli Glass Traders - Authentication & Authorization Engine
+ * Srivalli Glass Traders - Authentication & Authorization Engine
  * Session & JWT Verification with Role-Based Access Control (RBAC)
  */
 
@@ -58,3 +58,4 @@ export function verifyToken(token: string): AuthUser | null {
     return null;
   }
 }
+

@@ -78,7 +78,7 @@ export default function AdminSidebar() {
                 <Layers className="w-4 h-4" />
               </div>
               <span className="font-bold text-sm tracking-tight text-white truncate">
-                Sri Valli <span className="text-teal-400">ERP</span>
+                Srivalli <span className="text-teal-400">ERP</span>
               </span>
             </Link>
           )}
@@ -146,3 +146,4 @@ export default function AdminSidebar() {
     </aside>
   );
 }
+
