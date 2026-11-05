@@ -121,24 +121,13 @@ export default function HomePage() {
       <section className="bg-white py-14 sm:py-20 border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           
-          <div className="space-y-4 max-w-4xl">
-            {/* Eyebrow Header: W H Y   S R I V A L L I ? (Exact match to W H Y   G E N E S I S ?) */}
-            <p className="font-serif italic tracking-[0.25em] text-slate-500 text-sm sm:text-base uppercase font-semibold">
-              W H Y &nbsp; S R I V A L L I ?
-            </p>
-
-            {/* Major Heading (Exact match: Education that balances excellence, wellbeing, and ambition.) */}
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.15]">
+          {/* Main Statement & Narrative (Properly aligned with clean spacing) */}
+          <div className="text-center max-w-4xl mx-auto space-y-5">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-[1.2]">
               Glass trading that balances certified quality, precision sizing, and wholesale pricing.
             </h1>
 
-            {/* Subheading (Genesis Means "The Beginning.") */}
-            <h3 className="text-lg sm:text-xl font-bold text-slate-900 pt-2">
-              Srivalli Means &quot;Trust, Certified Sourcing &amp; Zero Wastage.&quot;
-            </h3>
-
-            {/* Description (Every remarkable journey starts with a beginning.) */}
-            <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-3xl">
+            <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-3xl mx-auto">
               Every architectural and residential project begins with reliable building materials. 
               As Hyderabad&apos;s trusted glass trading depot, we procure directly from certified float glass 
               manufacturers, offer exact millimeter guillotine sizing, and match reusable remnants to save our customers direct expenses.
@@ -208,7 +197,7 @@ export default function HomePage() {
                   <p className="text-xs text-slate-600 mt-0.5">Send your dimension list directly on WhatsApp</p>
                 </div>
                 <a
-                  href="https://wa.me/919876543210?text=Hello%20Srivalli%20Glass%20Traders,%20I%20have%20custom%20glass%20measurements%20for%20a%20quote"
+                  href="https://wa.me/919866906665?text=Hello%20Srivalli%20Glass%20Traders,%20I%20have%20custom%20glass%20measurements%20for%20a%20quote"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-4 py-2.5 rounded-full text-xs font-bold bg-[#8B1E2D] hover:bg-[#68121E] text-white shadow-sm flex items-center gap-1.5 transition-all shrink-0"
