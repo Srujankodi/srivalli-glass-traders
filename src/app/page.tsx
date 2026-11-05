@@ -122,12 +122,14 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           
           {/* Main Statement & Narrative (Properly aligned with clean spacing) */}
-          <div className="text-center max-w-4xl mx-auto space-y-5">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-[1.2]">
+          <div className="text-center max-w-3xl mx-auto space-y-4">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-[1.2] text-balance">
               Glass trading that balances certified quality, precision sizing, and wholesale pricing.
             </h1>
 
-            <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-3xl mx-auto">
+            <div className="w-12 h-1 bg-[#8B1E2D] rounded-full mx-auto my-2" />
+
+            <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto text-balance">
               Every architectural and residential project begins with reliable building materials. 
               As Hyderabad&apos;s trusted glass trading depot, we procure directly from certified float glass 
               manufacturers, offer exact millimeter guillotine sizing, and match reusable remnants to save our customers direct expenses.
