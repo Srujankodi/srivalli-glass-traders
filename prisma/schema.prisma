@@ -1,0 +1,647 @@
+// Prisma Schema for Sri Valli Glass Traders ERP & Customer Website
+// Database: PostgreSQL with high-precision decimal & relational integrity
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  OWNER
+  MANAGER
+  OPERATOR
+  SALES_EXECUTIVE
+}
+
+enum LeadSource {
+  WEBSITE
+  WHATSAPP
+  PHONE
+  WALK_IN
+  REFERRAL
+}
+
+enum LeadStatus {
+  NEW_INQUIRY
+  CONTACTED
+  REQUIREMENT_COLLECTED
+  CHECKING_INVENTORY
+  SUPPLIER_SOURCING
+  QUOTATION_SENT
+  NEGOTIATION
+  ORDER_CONFIRMED
+  COMPLETED
+  LOST
+}
+
+enum POStatus {
+  DRAFT
+  ORDERED
+  PARTIALLY_RECEIVED
+  RECEIVED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  UNPAID
+  PARTIALLY_PAID
+  PAID
+  OVERDUE
+}
+
+enum PaymentMode {
+  CASH
+  UPI
+  BANK_TRANSFER
+  CHEQUE
+  OTHER
+}
+
+enum StockStatus {
+  IN_STOCK
+  RESERVED
+  IN_CUTTING
+  CONSUMED
+  SCRAPPED
+  DAMAGED
+}
+
+enum OrderStatus {
+  DRAFT
+  CONFIRMED
+  PROCESSING
+  READY
+  PARTIALLY_DELIVERED
+  DELIVERED
+  CANCELLED
+}
+
+enum QuoteStatus {
+  DRAFT
+  SENT
+  ACCEPTED
+  REJECTED
+  EXPIRED
+  CONVERTED
+}
+
+enum CuttingStatus {
+  SCHEDULED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum CustomerType {
+  RETAIL
+  CONTRACTOR
+  BUILDER
+  INTERIOR_DESIGNER
+  GLASS_DEALER
+  WHOLESALE_BUYER
+}
+
+enum ExpenseCategory {
+  TRANSPORTATION
+  CUTTING_CHARGES
+  LOADING_UNLOADING
+  LABOR
+  RENT
+  ELECTRICITY
+  PACKAGING
+  REPAIRS_MAINTENANCE
+  OFFICE_SUPPLIES
+  OTHER
+}
+
+model User {
+  id           String      @id @default(uuid())
+  email        String      @unique
+  passwordHash String
+  name         String
+  role         Role        @default(OPERATOR)
+  phone        String?
+  isActive     Boolean     @default(true)
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  auditLogs    AuditLog[]
+}
+
+model BusinessSettings {
+  id                  String   @id @default(uuid())
+  companyName         String   @default("Sri Valli Glass Traders")
+  tagline             String   @default("Quality Glass Solutions at Competitive Prices")
+  address             String   @default("Shop No. 4, Plot 12, Glass Market, Hyderabad, Telangana 500001")
+  phone               String   @default("+91 98765 43210")
+  email               String   @default("contact@srivalliglasstraders.com")
+  whatsapp            String   @default("+91 98765 43210")
+  businessHours       String   @default("Mon - Sat: 9:00 AM - 8:30 PM | Sunday: 10:00 AM - 3:00 PM")
+  gstin               String?  @default("36AAAAA0000A1Z5")
+  stateCode           String   @default("36") // Telangana
+  stateName           String   @default("Telangana")
+  defaultGstRate      Float    @default(18.0)
+  currency            String   @default("INR")
+  currencySymbol      String   @default("₹")
+  cuttingLossMm       Float    @default(3.0)
+  minRemnantAreaSqFt  Float    @default(2.0)
+  updatedAt           DateTime @updatedAt
+}
+
+model ProductCategory {
+  id           String    @id @default(uuid())
+  name         String    @unique
+  slug         String    @unique
+  description  String?
+  displayOrder Int       @default(0)
+  isActive     Boolean   @default(true)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  products     Product[]
+}
+
+model Product {
+  id                 String           @id @default(uuid())
+  sku                String           @unique
+  name               String
+  categoryId         String
+  thicknessMm        Float            // e.g. 5.0, 8.0, 12.0
+  glassType          String           // Clear Float, Toughened, Frosted, etc.
+  description        String?
+  imageUrl           String?
+  purchaseRateSqFt   Float            @default(0)
+  sellingRateSqFt    Float            @default(0)
+  reorderLevelSqFt   Float            @default(50.0)
+  isPublic           Boolean          @default(true)
+  isActive           Boolean          @default(true)
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+
+  category           ProductCategory  @relation(fields: [categoryId], references: [id])
+  supplierPrices     SupplierPrice[]
+  purchaseOrderItems PurchaseOrderItem[]
+  glassSheets        GlassSheet[]
+  quotationItems     QuotationItem[]
+  salesOrderItems    SalesOrderItem[]
+}
+
+model Supplier {
+  id                 String           @id @default(uuid())
+  name               String
+  contactPerson      String?
+  phone              String
+  email              String?
+  address            String?
+  gstin              String?
+  paymentTerms       String?          @default("Net 30 Days")
+  totalPurchases     Float            @default(0)
+  outstandingBalance Float            @default(0)
+  notes              String?
+  isActive           Boolean          @default(true)
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+
+  supplierPrices     SupplierPrice[]
+  purchaseOrders     PurchaseOrder[]
+  payments           Payment[]
+}
+
+model SupplierPrice {
+  id           String   @id @default(uuid())
+  supplierId   String
+  productId    String
+  thicknessMm  Float
+  glassType    String
+  ratePerSqFt  Float
+  minOrderSqFt Float    @default(0)
+  deliveryDays Int      @default(2)
+  notes        String?
+  updatedAt    DateTime @updatedAt
+
+  supplier     Supplier @relation(fields: [supplierId], references: [id], onDelete: Cascade)
+  product      Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([supplierId, productId])
+}
+
+model PurchaseOrder {
+  id               String              @id @default(uuid())
+  poNumber         String              @unique
+  supplierId       String
+  orderDate        DateTime            @default(now())
+  expectedDate     DateTime?
+  status           POStatus            @default(DRAFT)
+  paymentStatus    PaymentStatus       @default(UNPAID)
+  subtotal         Float               @default(0)
+  taxAmount        Float               @default(0)
+  freightCost      Float               @default(0)
+  handlingCost     Float               @default(0)
+  otherExpenses    Float               @default(0)
+  landedCostTotal  Float               @default(0)
+  amountPaid       Float               @default(0)
+  balanceDue       Float               @default(0)
+  notes            String?
+  createdAt        DateTime            @default(now())
+  updatedAt        DateTime            @updatedAt
+
+  supplier         Supplier            @relation(fields: [supplierId], references: [id])
+  items            PurchaseOrderItem[]
+  goodsReceipts    GoodsReceipt[]
+  payments         Payment[]
+  expenses         Expense[]
+}
+
+model PurchaseOrderItem {
+  id              String        @id @default(uuid())
+  purchaseOrderId String
+  productId       String
+  lengthMm        Float
+  widthMm         Float
+  quantity        Int
+  totalSqFt       Float
+  unitRateSqFt    Float
+  lineTotal       Float
+  receivedQty     Int           @default(0)
+
+  purchaseOrder   PurchaseOrder @relation(fields: [purchaseOrderId], references: [id], onDelete: Cascade)
+  product         Product       @relation(fields: [productId], references: [id])
+  glassSheets     GlassSheet[]
+}
+
+model GoodsReceipt {
+  id              String        @id @default(uuid())
+  grnNumber       String        @unique
+  purchaseOrderId String
+  receiptDate     DateTime      @default(now())
+  receivedBy      String
+  notes           String?
+  createdAt       DateTime      @default(now())
+
+  purchaseOrder   PurchaseOrder @relation(fields: [purchaseOrderId], references: [id])
+}
+
+model GlassSheet {
+  id                  String             @id @default(uuid())
+  sheetTag            String             @unique // e.g. SHT-2026-0001
+  productId           String
+  purchaseOrderItemId String?
+  lengthMm            Float
+  widthMm             Float
+  thicknessMm         Float
+  glassType           String
+  areaSqFt            Float
+  landedCostPerSqFt   Float              @default(0)
+  totalCost           Float              @default(0)
+  rackLocation        String             @default("Main Rack A")
+  status              StockStatus        @default(IN_STOCK)
+  createdAt           DateTime           @default(now())
+  updatedAt           DateTime           @updatedAt
+
+  product             Product            @relation(fields: [productId], references: [id])
+  purchaseOrderItem   PurchaseOrderItem? @relation(fields: [purchaseOrderItemId], references: [id])
+  remnants            GlassRemnant[]
+  cuttingJobs         CuttingJob[]
+  salesOrderItems     SalesOrderItem[]
+}
+
+model GlassRemnant {
+  id               String       @id @default(uuid())
+  remnantTag       String       @unique // e.g. REM-2026-0001
+  sourceSheetId    String
+  lengthMm         Float
+  widthMm          Float
+  thicknessMm      Float
+  glassType        String
+  areaSqFt         Float
+  allocatedCost    Float        @default(0)
+  rackLocation     String       @default("Remnant Bin R1")
+  status           StockStatus  @default(IN_STOCK)
+  notes            String?
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+
+  sourceSheet      GlassSheet   @relation(fields: [sourceSheetId], references: [id], onDelete: Cascade)
+  cuttingJobs      CuttingJob[]
+  salesOrderItems  SalesOrderItem[]
+}
+
+model CuttingJob {
+  id                  String          @id @default(uuid())
+  jobTicket           String          @unique // e.g. CUT-2026-0001
+  sourceSheetId       String?
+  sourceRemnantId     String?
+  salesOrderId        String?
+  operatorName        String
+  status              CuttingStatus   @default(SCHEDULED)
+  originalLengthMm    Float
+  originalWidthMm     Float
+  originalAreaSqFt    Float
+  totalCuts           Int             @default(1)
+  cuttingLossSqFt     Float           @default(0)
+  scrapGeneratedSqFt  Float           @default(0)
+  notes               String?
+  completedAt         DateTime?
+  createdAt           DateTime        @default(now())
+  updatedAt           DateTime        @updatedAt
+
+  sourceSheet         GlassSheet?     @relation(fields: [sourceSheetId], references: [id])
+  sourceRemnant       GlassRemnant?   @relation(fields: [sourceRemnantId], references: [id])
+  salesOrder          SalesOrder?     @relation(fields: [salesOrderId], references: [id])
+  outputs             CuttingOutput[]
+  scrapInventories    ScrapInventory[]
+}
+
+model CuttingOutput {
+  id                   String      @id @default(uuid())
+  cuttingJobId         String
+  outputType           String      // "FINISHED_PIECE", "REMNANT", "SCRAP"
+  lengthMm             Float
+  widthMm              Float
+  areaSqFt             Float
+  destinationRemnantId String?
+  notes                String?
+
+  cuttingJob           CuttingJob  @relation(fields: [cuttingJobId], references: [id], onDelete: Cascade)
+}
+
+model ScrapInventory {
+  id              String       @id @default(uuid())
+  glassType       String
+  thicknessMm     Float
+  weightKg        Float        @default(0)
+  areaSqFt        Float        @default(0)
+  sourceJobId     String?
+  status          StockStatus  @default(IN_STOCK)
+  storageLocation String       @default("Scrap Bin S1")
+  notes           String?
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+
+  sourceJob       CuttingJob?  @relation(fields: [sourceJobId], references: [id])
+}
+
+model ScrapSale {
+  id              String         @id @default(uuid())
+  scrapInvoiceNo  String         @unique // e.g. SCR-2026-0001
+  buyerName       String
+  buyerPhone      String
+  totalWeightKg   Float          @default(0)
+  totalSqFt       Float          @default(0)
+  ratePerUnit     Float
+  unitType        String         @default("KG") // "KG" or "SQ_FT"
+  totalAmount     Float
+  paymentStatus   PaymentStatus  @default(PAID)
+  paymentMethod   PaymentMode    @default(CASH)
+  saleDate        DateTime       @default(now())
+  createdAt       DateTime       @default(now())
+}
+
+model Customer {
+  id                 String         @id @default(uuid())
+  name               String
+  phone              String
+  email              String?
+  address            String?
+  customerType       CustomerType   @default(RETAIL)
+  gstin              String?
+  notes              String?
+  totalPurchases     Float          @default(0)
+  outstandingBalance Float          @default(0)
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+
+  quotations         Quotation[]
+  salesOrders        SalesOrder[]
+  invoices           Invoice[]
+  payments           Payment[]
+}
+
+model CRMLead {
+  id               String       @id @default(uuid())
+  leadCode         String       @unique // e.g. LEAD-2026-0001
+  customerName     String
+  phone            String
+  email            String?
+  source           LeadSource   @default(WEBSITE)
+  status           LeadStatus   @default(NEW_INQUIRY)
+  glassType        String?
+  thicknessMm      Float?
+  length           Float?
+  width            Float?
+  unit             String?      @default("ft") // "ft", "in", "mm", "cm"
+  quantity         Int?         @default(1)
+  estimatedSqFt    Float?       @default(0)
+  deliveryLocation String?
+  notes            String?
+  assignedTo       String?
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+
+  activities       CRMActivity[]
+  quotations       Quotation[]
+}
+
+model CRMActivity {
+  id           String    @id @default(uuid())
+  leadId       String
+  activityType String    // "CALL", "WHATSAPP", "NOTE", "SITE_VISIT", "STATUS_CHANGE"
+  description  String
+  followUpDate DateTime?
+  createdBy    String
+  createdAt    DateTime  @default(now())
+
+  lead         CRMLead   @relation(fields: [leadId], references: [id], onDelete: Cascade)
+}
+
+model Quotation {
+  id                 String          @id @default(uuid())
+  quoteNumber        String          @unique // e.g. QT-2026-0001
+  customerId         String?
+  leadId             String?
+  quoteDate          DateTime        @default(now())
+  validUntil         DateTime
+  subtotal           Float           @default(0)
+  cuttingCharges     Float           @default(0)
+  transportCharges   Float           @default(0)
+  discountAmount     Float           @default(0)
+  taxAmount          Float           @default(0)
+  totalAmount        Float           @default(0)
+  status             QuoteStatus     @default(DRAFT)
+  notes              String?
+  version            Int             @default(1)
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
+
+  customer           Customer?       @relation(fields: [customerId], references: [id])
+  lead               CRMLead?        @relation(fields: [leadId], references: [id])
+  items              QuotationItem[]
+  salesOrders        SalesOrder[]
+}
+
+model QuotationItem {
+  id              String    @id @default(uuid())
+  quotationId     String
+  productId       String?
+  glassType       String
+  thicknessMm     Float
+  lengthMm        Float
+  widthMm         Float
+  inputUnit       String    @default("ft")
+  inputLength     Float     @default(0)
+  inputWidth      Float     @default(0)
+  quantity        Int       @default(1)
+  areaSqFtPerPiece Float
+  totalSqFt       Float
+  ratePerSqFt     Float
+  itemTotal       Float
+
+  quotation       Quotation @relation(fields: [quotationId], references: [id], onDelete: Cascade)
+  product         Product?  @relation(fields: [productId], references: [id])
+}
+
+model SalesOrder {
+  id                 String           @id @default(uuid())
+  orderNumber        String           @unique // e.g. SO-2026-0001
+  customerId         String
+  quotationId        String?
+  orderDate          DateTime         @default(now())
+  deliveryDate       DateTime?
+  status             OrderStatus      @default(CONFIRMED)
+  paymentStatus      PaymentStatus    @default(UNPAID)
+  subtotal           Float            @default(0)
+  cuttingCharges     Float            @default(0)
+  transportCharges   Float            @default(0)
+  taxAmount          Float            @default(0)
+  totalAmount        Float            @default(0)
+  amountPaid         Float            @default(0)
+  balanceDue         Float            @default(0)
+  notes              String?
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+
+  customer           Customer         @relation(fields: [customerId], references: [id])
+  quotation          Quotation?       @relation(fields: [quotationId], references: [id])
+  items              SalesOrderItem[]
+  invoices           Invoice[]
+  cuttingJobs        CuttingJob[]
+  expenses           Expense[]
+}
+
+model SalesOrderItem {
+  id                 String        @id @default(uuid())
+  salesOrderId       String
+  productId          String?
+  glassType          String
+  thicknessMm        Float
+  lengthMm           Float
+  widthMm            Float
+  quantity           Int           @default(1)
+  totalSqFt          Float
+  ratePerSqFt        Float
+  itemTotal          Float
+  allocatedSheetId   String?
+  allocatedRemnantId String?
+
+  salesOrder         SalesOrder    @relation(fields: [salesOrderId], references: [id], onDelete: Cascade)
+  product            Product?      @relation(fields: [productId], references: [id])
+  allocatedSheet     GlassSheet?   @relation(fields: [allocatedSheetId], references: [id])
+  allocatedRemnant   GlassRemnant? @relation(fields: [allocatedRemnantId], references: [id])
+}
+
+model Invoice {
+  id               String          @id @default(uuid())
+  invoiceNumber    String          @unique // e.g. INV-2026-0001
+  salesOrderId     String
+  customerId       String
+  invoiceDate      DateTime        @default(now())
+  dueDate          DateTime?
+  subtotal         Float           @default(0)
+  cuttingCharges   Float           @default(0)
+  transportCharges Float           @default(0)
+  cgstAmount       Float           @default(0)
+  sgstAmount       Float           @default(0)
+  igstAmount       Float           @default(0)
+  totalAmount      Float           @default(0)
+  amountPaid       Float           @default(0)
+  balanceDue       Float           @default(0)
+  status           PaymentStatus   @default(UNPAID)
+  notes            String?
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+
+  salesOrder       SalesOrder      @relation(fields: [salesOrderId], references: [id])
+  customer         Customer        @relation(fields: [customerId], references: [id])
+  items            InvoiceItem[]
+  payments         Payment[]
+}
+
+model InvoiceItem {
+  id          String   @id @default(uuid())
+  invoiceId   String
+  description String
+  hsnCode     String   @default("7005")
+  lengthMm    Float
+  widthMm     Float
+  quantity    Int
+  totalSqFt   Float
+  ratePerSqFt Float
+  amount      Float
+
+  invoice     Invoice  @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+}
+
+model Payment {
+  id                String        @id @default(uuid())
+  paymentReceiptNo  String        @unique // e.g. REC-2026-0001
+  invoiceId         String?
+  customerId        String?
+  supplierId        String?
+  purchaseOrderId   String?
+  paymentType       String        // "CUSTOMER_COLLECTION" or "SUPPLIER_PAYMENT"
+  paymentMode       PaymentMode   @default(UPI)
+  referenceNumber   String?       // UPI Ref / Cheque No / Bank Txn
+  amount            Float
+  paymentDate       DateTime      @default(now())
+  notes             String?
+  createdAt         DateTime      @default(now())
+
+  invoice           Invoice?       @relation(fields: [invoiceId], references: [id])
+  customer          Customer?      @relation(fields: [customerId], references: [id])
+  supplier          Supplier?      @relation(fields: [supplierId], references: [id])
+  purchaseOrder     PurchaseOrder? @relation(fields: [purchaseOrderId], references: [id])
+}
+
+model Expense {
+  id              String          @id @default(uuid())
+  category        ExpenseCategory @default(TRANSPORTATION)
+  amount          Float
+  paymentMode     PaymentMode     @default(CASH)
+  referenceNumber String?
+  expenseDate     DateTime        @default(now())
+  description     String
+  recipient       String?
+  purchaseOrderId String?
+  salesOrderId    String?
+  createdAt       DateTime        @default(now())
+
+  purchaseOrder   PurchaseOrder?  @relation(fields: [purchaseOrderId], references: [id])
+  salesOrder      SalesOrder?     @relation(fields: [salesOrderId], references: [id])
+}
+
+model AuditLog {
+  id         String   @id @default(uuid())
+  userId     String?
+  action     String   // e.g. "CREATE_PURCHASE", "CUT_SHEET", "RECORD_PAYMENT"
+  entityType String   // e.g. "GlassSheet", "Invoice", "CuttingJob"
+  entityId   String?
+  details    String?  // JSON stringified details
+  ipAddress  String?
+  createdAt  DateTime @default(now())
+
+  user       User?    @relation(fields: [userId], references: [id])
+}
