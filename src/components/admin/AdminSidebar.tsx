@@ -77,8 +77,8 @@ export default function AdminSidebar() {
               <div className="w-8 h-8 rounded-lg bg-[#8B1E2D] flex items-center justify-center text-white shadow-xs">
                 <Layers className="w-4 h-4" />
               </div>
-              <span className="font-extrabold text-sm tracking-tight text-slate-900 truncate">
-                Srivalli <span className="text-[#8B1E2D]">ERP</span>
+              <span className="font-black text-xs tracking-tight text-slate-900 truncate">
+                SRIVALLI GLASS TRADERS
               </span>
             </Link>
           )}

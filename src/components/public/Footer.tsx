@@ -39,15 +39,15 @@ export default function PublicFooter() {
           {/* Brand Col */}
           <div className="space-y-4">
             <div className="flex items-center space-x-3.5">
-              <div className="w-11 h-11 rounded-2xl bg-[#8B1E2D] flex items-center justify-center text-white shadow-md">
+              <div className="w-11 h-11 rounded-2xl bg-[#8B1E2D] flex items-center justify-center text-white shadow-md shrink-0">
                 <Layers className="w-6 h-6 text-white" />
               </div>
               <div>
-                <span className="text-2xl font-extrabold tracking-tight text-white block">
-                  Srivalli
+                <span className="text-lg sm:text-xl font-black tracking-tight text-white block">
+                  SRIVALLI GLASS TRADERS
                 </span>
                 <span className="text-[11px] font-bold tracking-[0.2em] text-[#C2364B] uppercase block">
-                  Glass Traders &bull; Hyderabad
+                  Hyderabad &bull; Telangana
                 </span>
               </div>
             </div>

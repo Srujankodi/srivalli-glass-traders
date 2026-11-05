@@ -103,11 +103,11 @@ export default function HomePage() {
                 </div>
 
                 {/* Dark Gradient Overlay at Bottom */}
-                <div className={`absolute inset-0 bg-gradient-to-t ${pill.bgGradient} flex flex-col justify-end p-5 text-white z-10`}>
-                  <h4 className="text-base sm:text-lg font-extrabold leading-snug group-hover:text-amber-200 transition-colors">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-5 text-white z-10">
+                  <h4 className="text-base sm:text-lg font-black text-white leading-snug drop-shadow-sm group-hover:text-amber-200 transition-colors">
                     {pill.title}
                   </h4>
-                  <p className="text-xs text-slate-200 mt-1 line-clamp-1 font-medium">
+                  <p className="text-xs sm:text-sm text-slate-100 mt-1 line-clamp-1 font-semibold drop-shadow-sm">
                     {pill.subtitle}
                   </p>
                 </div>
@@ -117,62 +117,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* The Big Stats Strip (Identical to screenshot layout: 20 | 7 | 10,000+ | 950+ | 7,000+) */}
-      <section className="bg-white border-b border-slate-200 py-12 sm:py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-slate-100">
-            
-            <div className="pt-4 md:pt-0">
-              <div className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#8B1E2D] tracking-tight">
-                3mm – 19mm
-              </div>
-              <div className="text-xs sm:text-sm font-extrabold tracking-widest text-slate-800 uppercase mt-2">
-                THICKNESS RANGE
-              </div>
-            </div>
-
-            <div className="pt-4 md:pt-0 md:pl-6">
-              <div className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#8B1E2D] tracking-tight">
-                10ft × 8ft
-              </div>
-              <div className="text-xs sm:text-sm font-extrabold tracking-widest text-slate-800 uppercase mt-2">
-                JUMBO SHEET SIZES
-              </div>
-            </div>
-
-            <div className="pt-4 md:pt-0 md:pl-6">
-              <div className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#8B1E2D] tracking-tight">
-                100%
-              </div>
-              <div className="text-xs sm:text-sm font-extrabold tracking-widest text-slate-800 uppercase mt-2">
-                SIZING ACCURACY
-              </div>
-            </div>
-
-            <div className="pt-4 md:pt-0 md:pl-6">
-              <div className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#8B1E2D] tracking-tight">
-                ₹ DIRECT
-              </div>
-              <div className="text-xs sm:text-sm font-extrabold tracking-widest text-slate-800 uppercase mt-2">
-                WHOLESALE RATES
-              </div>
-            </div>
-
-            <div className="pt-4 md:pt-0 md:pl-6 col-span-2 md:col-span-1">
-              <div className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#8B1E2D] tracking-tight">
-                HYDERABAD
-              </div>
-              <div className="text-xs sm:text-sm font-extrabold tracking-widest text-slate-800 uppercase mt-2">
-                TELANGANA DISPATCH
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
       {/* Main Feature Section (Matching screenshot typography & spacing) */}
-      <section className="bg-white py-16 sm:py-24 border-b border-slate-200">
+      <section className="bg-white py-14 sm:py-20 border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           
           <div className="space-y-4 max-w-4xl">

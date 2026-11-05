@@ -42,23 +42,17 @@ export default function PublicNavbar() {
         <div className="flex items-center justify-between h-20 sm:h-24">
           
           {/* Logo on Left */}
-          <Link href="/" className="flex items-center gap-3.5 group">
+          <Link href="/" className="flex items-center gap-3 group">
             {/* Crimson Geometric Emblem */}
-            <div className="relative w-12 h-12 flex items-center justify-center shrink-0">
-              <div className="w-11 h-11 rounded-2xl bg-[#8B1E2D] flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
-                <Layers className="w-6 h-6 text-white" />
+            <div className="relative w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center shrink-0">
+              <div className="w-full h-full rounded-2xl bg-[#8B1E2D] flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
+                <Layers className="w-5 h-5 text-white" />
               </div>
-              <span className="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-amber-500 border-2 border-white" />
             </div>
 
-            <div className="flex flex-col">
-              <span className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 leading-none">
-                Srivalli
-              </span>
-              <span className="text-[10px] sm:text-xs font-bold tracking-[0.2em] text-[#8B1E2D] uppercase mt-1">
-                Glass Traders &bull; Hyderabad
-              </span>
-            </div>
+            <span className="text-base sm:text-xl md:text-2xl font-black tracking-tight text-slate-900 whitespace-nowrap">
+              SRIVALLI GLASS TRADERS
+            </span>
           </Link>
 
           {/* Center Navigation Links */}
@@ -81,23 +75,13 @@ export default function PublicNavbar() {
             })}
           </nav>
 
-          {/* Right Badge / CTA */}
-          <div className="hidden md:flex items-center gap-4">
-            {/* Anniversary / Quality Seal Badge like the 20 badge in screenshot */}
-            <div className="flex items-center gap-2 pl-3 border-l border-slate-200">
-              <div className="w-11 h-11 rounded-full bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center text-white font-black text-sm shadow-sm ring-2 ring-amber-200">
-                100%
-              </div>
-              <div className="text-[11px] font-bold text-slate-700 leading-tight">
-                CERTIFIED<br />WHOLESALE
-              </div>
-            </div>
-
+          {/* Right CTA */}
+          <div className="hidden md:flex items-center gap-3">
             <a
               href={`https://wa.me/${cleanWaNumber}?text=Hello%20Srivalli%20Glass%20Traders,%20I%20am%20looking%20for%20a%20glass%20quote`}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2.5 rounded-full text-xs font-bold bg-[#8B1E2D] hover:bg-[#68121E] text-white shadow-sm hover:shadow transition-all flex items-center gap-1.5"
+              className="px-5 py-2.5 rounded-full text-xs font-extrabold bg-[#8B1E2D] hover:bg-[#68121E] text-white shadow-sm hover:shadow transition-all flex items-center gap-1.5"
             >
               <MessageSquare className="w-3.5 h-3.5" />
               <span>WhatsApp</span>
