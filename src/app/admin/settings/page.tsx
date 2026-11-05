@@ -89,19 +89,19 @@ export default function AdminSettingsPage() {
 
   return (
     <div className="space-y-8 max-w-4xl">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-3xl bg-slate-900 border border-white/10">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-7 rounded-3xl bg-white border border-slate-200/90 shadow-sm">
         <div>
-          <h1 className="text-2xl font-extrabold text-white flex items-center gap-2">
-            <Settings className="w-6 h-6 text-teal-400" />
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 flex items-center gap-2.5">
+            <Settings className="w-7 h-7 text-[#8B1E2D]" />
             <span>Business Profile &amp; Website Settings</span>
           </h1>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-sm text-slate-600 mt-1">
             Updating details here directly changes the public customer website, WhatsApp chat links, and tax invoice headers on refresh.
           </p>
         </div>
 
         {saved && (
-          <div className="px-3.5 py-1.5 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs flex items-center gap-1.5">
+          <div className="px-4 py-2 rounded-xl bg-red-50 border border-red-200 text-[#8B1E2D] text-xs font-bold flex items-center gap-2 shadow-xs">
             <CheckCircle2 className="w-4 h-4" />
             <span>Saved &amp; Updated Live on Website!</span>
           </div>
@@ -109,154 +109,154 @@ export default function AdminSettingsPage() {
       </div>
 
       <form onSubmit={handleSave} className="space-y-6">
-        <div className="p-6 rounded-3xl bg-slate-900 border border-white/10 space-y-4">
-          <h2 className="text-base font-bold text-white flex items-center gap-2">
-            <Building2 className="w-4 h-4 text-teal-400" />
+        <div className="p-7 rounded-3xl bg-white border border-slate-200 shadow-card space-y-5">
+          <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2.5 pb-3 border-b border-slate-100">
+            <Building2 className="w-5 h-5 text-[#8B1E2D]" />
             <span>Enterprise Identity</span>
           </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm">
             <div>
-              <label className="block text-slate-300 mb-1">Company Trade Name</label>
+              <label className="block text-slate-700 font-bold mb-1.5 uppercase text-xs">Company Trade Name</label>
               <input
                 type="text"
                 value={companyName}
                 onChange={(e) => setCompanyName(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800 border border-white/15 text-white"
+                className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 font-bold focus:outline-none focus:border-[#8B1E2D]"
               />
             </div>
             <div>
-              <label className="block text-slate-300 mb-1">Business Tagline</label>
+              <label className="block text-slate-700 font-bold mb-1.5 uppercase text-xs">Business Tagline</label>
               <input
                 type="text"
                 value={tagline}
                 onChange={(e) => setTagline(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800 border border-white/15 text-white"
+                className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 font-medium focus:outline-none focus:border-[#8B1E2D]"
               />
             </div>
           </div>
 
-          <div className="text-xs">
-            <label className="block text-slate-300 mb-1">Workshop &amp; Trading Address (Hyderabad)</label>
+          <div className="text-xs sm:text-sm">
+            <label className="block text-slate-700 font-bold mb-1.5 uppercase text-xs">Workshop &amp; Trading Address (Hyderabad)</label>
             <input
               type="text"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
-              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800 border border-white/15 text-white"
+              className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 font-medium focus:outline-none focus:border-[#8B1E2D]"
             />
           </div>
         </div>
 
-        <div className="p-6 rounded-3xl bg-slate-900 border border-white/10 space-y-4">
-          <h2 className="text-base font-bold text-white flex items-center gap-2">
-            <Phone className="w-4 h-4 text-teal-400" />
+        <div className="p-7 rounded-3xl bg-white border border-slate-200 shadow-card space-y-5">
+          <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2.5 pb-3 border-b border-slate-100">
+            <Phone className="w-5 h-5 text-[#8B1E2D]" />
             <span>Customer Contact &amp; Channels</span>
           </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs sm:text-sm">
             <div>
-              <label className="block text-slate-300 mb-1">Official Phone Number</label>
+              <label className="block text-slate-700 font-bold mb-1.5 uppercase text-xs">Official Phone Number</label>
               <input
                 type="text"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800 border border-white/15 text-white font-mono"
+                className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 font-bold focus:outline-none focus:border-[#8B1E2D]"
               />
             </div>
             <div>
-              <label className="block text-slate-300 mb-1">WhatsApp Business Number</label>
+              <label className="block text-slate-700 font-bold mb-1.5 uppercase text-xs">WhatsApp Business Number</label>
               <input
                 type="text"
                 value={whatsapp}
                 onChange={(e) => setWhatsapp(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800 border border-white/15 text-white font-mono"
+                className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 font-bold focus:outline-none focus:border-[#8B1E2D]"
               />
             </div>
             <div>
-              <label className="block text-slate-300 mb-1">Email Address</label>
+              <label className="block text-slate-700 font-bold mb-1.5 uppercase text-xs">Email Address</label>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800 border border-white/15 text-white"
+                className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 font-medium focus:outline-none focus:border-[#8B1E2D]"
               />
             </div>
           </div>
 
-          <div className="text-xs">
-            <label className="block text-slate-300 mb-1">Operating Business Hours</label>
+          <div className="text-xs sm:text-sm">
+            <label className="block text-slate-700 font-bold mb-1.5 uppercase text-xs">Operating Business Hours</label>
             <input
               type="text"
               value={businessHours}
               onChange={(e) => setBusinessHours(e.target.value)}
-              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800 border border-white/15 text-white"
+              className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 font-medium focus:outline-none focus:border-[#8B1E2D]"
             />
           </div>
         </div>
 
-        <div className="p-6 rounded-3xl bg-slate-900 border border-white/10 space-y-4">
-          <h2 className="text-base font-bold text-white flex items-center gap-2">
-            <Percent className="w-4 h-4 text-teal-400" />
+        <div className="p-7 rounded-3xl bg-white border border-slate-200 shadow-card space-y-5">
+          <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2.5 pb-3 border-b border-slate-100">
+            <Percent className="w-5 h-5 text-[#8B1E2D]" />
             <span>GST &amp; Tax Registration</span>
           </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs sm:text-sm">
             <div>
-              <label className="block text-slate-300 mb-1">GSTIN Number</label>
+              <label className="block text-slate-700 font-bold mb-1.5 uppercase text-xs">GSTIN Number</label>
               <input
                 type="text"
                 value={gstin}
                 onChange={(e) => setGstin(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800 border border-white/15 text-white font-mono uppercase"
+                className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 font-bold uppercase focus:outline-none focus:border-[#8B1E2D]"
               />
             </div>
             <div>
-              <label className="block text-slate-300 mb-1">State Code</label>
+              <label className="block text-slate-700 font-bold mb-1.5 uppercase text-xs">State Code</label>
               <input
                 type="text"
                 value={stateCode}
                 onChange={(e) => setStateCode(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800 border border-white/15 text-white font-mono"
+                className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 font-bold focus:outline-none focus:border-[#8B1E2D]"
               />
             </div>
             <div>
-              <label className="block text-slate-300 mb-1">Default GST Rate (%)</label>
+              <label className="block text-slate-700 font-bold mb-1.5 uppercase text-xs">Default GST Rate (%)</label>
               <input
                 type="number"
                 step="0.5"
                 value={defaultGstRate}
                 onChange={(e) => setDefaultGstRate(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800 border border-white/15 text-white font-mono"
+                className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 font-bold focus:outline-none focus:border-[#8B1E2D]"
               />
             </div>
           </div>
         </div>
 
-        <div className="p-6 rounded-3xl bg-slate-900 border border-white/10 space-y-4">
-          <h2 className="text-base font-bold text-white flex items-center gap-2">
-            <Scissors className="w-4 h-4 text-teal-400" />
+        <div className="p-7 rounded-3xl bg-white border border-slate-200 shadow-card space-y-5">
+          <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2.5 pb-3 border-b border-slate-100">
+            <Scissors className="w-5 h-5 text-[#8B1E2D]" />
             <span>Glass Cutting &amp; Remnant Engine Thresholds</span>
           </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm">
             <div>
-              <label className="block text-slate-300 mb-1">Cutting Kerf Loss (mm)</label>
+              <label className="block text-slate-700 font-bold mb-1.5 uppercase text-xs">Cutting Kerf Loss (mm)</label>
               <input
                 type="number"
                 step="0.1"
                 value={cuttingLossMm}
                 onChange={(e) => setCuttingLossMm(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800 border border-white/15 text-white font-mono"
+                className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 font-bold focus:outline-none focus:border-[#8B1E2D]"
               />
             </div>
             <div>
-              <label className="block text-slate-300 mb-1">Minimum Remnant Area for Salvage (sq ft)</label>
+              <label className="block text-slate-700 font-bold mb-1.5 uppercase text-xs">Minimum Remnant Area for Salvage (sq ft)</label>
               <input
                 type="number"
                 step="0.5"
                 value={minRemnantAreaSqFt}
                 onChange={(e) => setMinRemnantAreaSqFt(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800 border border-white/15 text-white font-mono"
+                className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 font-bold focus:outline-none focus:border-[#8B1E2D]"
               />
             </div>
           </div>
@@ -266,7 +266,7 @@ export default function AdminSettingsPage() {
           <button
             type="submit"
             disabled={saving}
-            className="px-6 py-3 rounded-xl text-xs font-semibold bg-teal-600 hover:bg-teal-500 text-white flex items-center gap-2 shadow-glassHover transition-all disabled:opacity-50"
+            className="px-8 py-3.5 rounded-xl text-sm font-extrabold bg-[#8B1E2D] hover:bg-[#68121E] text-white flex items-center gap-2 shadow-md hover:shadow-lg transition-all disabled:opacity-50"
           >
             <Save className="w-4 h-4" />
             <span>{saving ? 'Saving...' : 'Save ERP Configuration'}</span>

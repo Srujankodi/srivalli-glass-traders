@@ -38,11 +38,9 @@ export default function AdminDashboardPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // In dev / production, load live dynamic metrics from API
     fetch('/api/inventory')
       .then((res) => res.json())
       .then(() => {
-        // Fetch dashboard metrics
         fetchMetrics();
       })
       .catch((e) => console.error(e));
@@ -62,7 +60,6 @@ export default function AdminDashboardPage() {
     }
   };
 
-  // Sample historical trend comparison for Recharts
   const monthlyFinancialData = [
     { month: 'Jun', sales: 42000, purchases: 31000, profit: 11000 },
     { month: 'Jul', sales: 58000, purchases: 39000, profit: 19000 },
@@ -73,238 +70,240 @@ export default function AdminDashboardPage() {
   ];
 
   const stockDistributionData = [
-    { name: 'Clear Float Glass', value: 45, color: '#0D9488' },
-    { name: 'Toughened Glass', value: 30, color: '#2563EB' },
-    { name: 'Tinted & Mirror', value: 15, color: '#8B5CF6' },
-    { name: 'Reusable Remnants', value: 10, color: '#F59E0B' },
+    { name: 'Clear Float Glass', value: 45, color: '#8B1E2D' },
+    { name: 'Toughened Glass', value: 30, color: '#0F172A' },
+    { name: 'Tinted & Mirror', value: 15, color: '#D97706' },
+    { name: 'Reusable Remnants', value: 10, color: '#059669' },
   ];
 
   return (
     <div className="space-y-8">
       
       {/* Top Banner & Quick Status */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-3xl bg-slate-900 border border-white/10">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-7 rounded-3xl bg-white border border-slate-200/90 shadow-sm">
         <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-extrabold text-white">Executive Operations Dashboard</h1>
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-teal-500/10 text-teal-300 border border-teal-500/30">
-              Hyderabad Main Branch
+          <div className="flex items-center gap-2.5">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+              Executive Operations Dashboard
+            </h1>
+            <span className="px-3 py-1 rounded-full text-xs font-bold bg-red-50 text-[#8B1E2D] border border-red-200">
+              Hyderabad Main Depot
             </span>
           </div>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-sm text-slate-600 mt-1">
             Real-time material valuation, cutting salvage tracking, and gross/net profit analytics.
           </p>
         </div>
 
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-3">
           <Link
             href="/admin/calculator"
-            className="px-4 py-2 rounded-xl text-xs font-semibold bg-teal-600 hover:bg-teal-500 text-white flex items-center gap-1.5 transition-colors shadow-sm"
+            className="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold bg-[#8B1E2D] hover:bg-[#68121E] text-white flex items-center gap-2 transition-all shadow-xs"
           >
-            <Scissors className="w-3.5 h-3.5" />
+            <Scissors className="w-4 h-4" />
             <span>Sq Ft Calculator</span>
           </Link>
           <Link
             href="/admin/cutting"
-            className="px-4 py-2 rounded-xl text-xs font-semibold bg-white/10 hover:bg-white/15 text-slate-200 transition-colors"
+            className="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-slate-100 hover:bg-slate-200 text-slate-800 transition-colors border border-slate-200"
           >
             Start Cut Job
           </Link>
         </div>
       </div>
 
-      {/* KPI Cards Grid (12 Strategic Business Cards) */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* KPI Cards Grid (12 Strategic Cards) */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         
-        {/* 1. Monthly Revenue */}
-        <div className="p-5 rounded-2xl bg-slate-900/90 border border-white/10 space-y-3">
-          <div className="flex items-center justify-between text-slate-400">
-            <span className="text-xs font-medium uppercase tracking-wider">Total Sales Revenue</span>
-            <div className="w-8 h-8 rounded-lg bg-teal-500/20 text-teal-400 flex items-center justify-center">
+        {/* 1. Total Revenue */}
+        <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-3">
+          <div className="flex items-center justify-between text-slate-500">
+            <span className="text-xs font-bold uppercase tracking-wider">Total Sales Revenue</span>
+            <div className="w-9 h-9 rounded-xl bg-red-50 text-[#8B1E2D] flex items-center justify-center font-bold">
               <IndianRupee className="w-4 h-4" />
             </div>
           </div>
-          <div className="text-2xl font-extrabold text-white">
+          <div className="text-2xl sm:text-3xl font-black text-slate-900">
             {formatINR(metrics?.totalSales || 86150)}
           </div>
-          <div className="flex items-center gap-1.5 text-xs text-emerald-400">
-            <TrendingUp className="w-3.5 h-3.5" />
+          <div className="flex items-center gap-1.5 text-xs text-emerald-800 font-bold">
+            <TrendingUp className="w-4 h-4 text-emerald-700" />
             <span>Recorded from verified invoices</span>
           </div>
         </div>
 
         {/* 2. Total Purchases */}
-        <div className="p-5 rounded-2xl bg-slate-900/90 border border-white/10 space-y-3">
-          <div className="flex items-center justify-between text-slate-400">
-            <span className="text-xs font-medium uppercase tracking-wider">Total Landed Purchases</span>
-            <div className="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center">
+        <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-3">
+          <div className="flex items-center justify-between text-slate-500">
+            <span className="text-xs font-bold uppercase tracking-wider">Total Purchases</span>
+            <div className="w-9 h-9 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center">
               <ShoppingCart className="w-4 h-4" />
             </div>
           </div>
-          <div className="text-2xl font-extrabold text-white">
+          <div className="text-2xl sm:text-3xl font-black text-slate-900">
             {formatINR(metrics?.totalPurchases || 63916)}
           </div>
-          <div className="text-xs text-slate-400">
+          <div className="text-xs text-slate-500 font-medium">
             Includes freight &amp; unloading costs
           </div>
         </div>
 
         {/* 3. Gross Profit */}
-        <div className="p-5 rounded-2xl bg-slate-900/90 border border-white/10 space-y-3">
-          <div className="flex items-center justify-between text-slate-400">
-            <span className="text-xs font-medium uppercase tracking-wider">Gross Profit</span>
-            <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
-              <TrendingUp className="w-4 h-4" />
+        <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-3">
+          <div className="flex items-center justify-between text-slate-500">
+            <span className="text-xs font-bold uppercase tracking-wider">Gross Profit</span>
+            <div className="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-800 flex items-center justify-center font-bold">
+              <TrendingUp className="w-4 h-4 text-emerald-700" />
             </div>
           </div>
-          <div className="text-2xl font-extrabold text-emerald-400">
+          <div className="text-2xl sm:text-3xl font-black text-emerald-800">
             {formatINR(metrics?.grossProfit || 30152)}
           </div>
-          <div className="text-xs text-slate-400">
+          <div className="text-xs text-slate-500 font-medium">
             Sales minus landed material COGS
           </div>
         </div>
 
         {/* 4. Net Business Profit */}
-        <div className="p-5 rounded-2xl bg-slate-900/90 border border-emerald-500/30 space-y-3 bg-emerald-950/10">
-          <div className="flex items-center justify-between text-slate-400">
-            <span className="text-xs font-medium uppercase tracking-wider text-emerald-300">Net Business Profit</span>
-            <div className="w-8 h-8 rounded-lg bg-emerald-500/30 text-emerald-300 flex items-center justify-center">
+        <div className="p-6 rounded-2xl bg-red-50/60 border border-red-200 shadow-sm space-y-3">
+          <div className="flex items-center justify-between text-slate-700">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#8B1E2D]">Net Business Profit</span>
+            <div className="w-9 h-9 rounded-xl bg-[#8B1E2D] text-white flex items-center justify-center font-bold">
               <ShieldCheck className="w-4 h-4" />
             </div>
           </div>
-          <div className="text-2xl font-extrabold text-emerald-300">
+          <div className="text-2xl sm:text-3xl font-black text-[#8B1E2D]">
             {formatINR(metrics?.netProfit || 22234)}
           </div>
-          <div className="text-xs text-emerald-400/80 font-medium">
+          <div className="text-xs text-slate-700 font-semibold">
             Margin: <strong>{metrics?.netProfitMargin || 25.8}%</strong> after operating overheads
           </div>
         </div>
 
         {/* 5. Available Stock Sheets */}
-        <div className="p-5 rounded-2xl bg-slate-900/90 border border-white/10 space-y-3">
-          <div className="flex items-center justify-between text-slate-400">
-            <span className="text-xs font-medium uppercase tracking-wider">Full Sheet Stock</span>
-            <div className="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center">
+        <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-3">
+          <div className="flex items-center justify-between text-slate-500">
+            <span className="text-xs font-bold uppercase tracking-wider">Full Sheet Stock</span>
+            <div className="w-9 h-9 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center">
               <Boxes className="w-4 h-4" />
             </div>
           </div>
-          <div className="text-2xl font-extrabold text-white">
-            {metrics?.availableInventorySqFt || 336} <span className="text-sm font-normal text-slate-400">sq ft</span>
+          <div className="text-2xl sm:text-3xl font-black text-slate-900">
+            {metrics?.availableInventorySqFt || 336} <span className="text-sm font-semibold text-slate-500">sq ft</span>
           </div>
-          <div className="text-xs text-slate-400">
-            Valuation: <strong>{formatINR(metrics?.inventoryValue || 27272)}</strong>
+          <div className="text-xs text-slate-500 font-medium">
+            Valuation: <strong className="text-slate-800">{formatINR(metrics?.inventoryValue || 27272)}</strong>
           </div>
         </div>
 
         {/* 6. Reusable Remnant Stock */}
-        <div className="p-5 rounded-2xl bg-slate-900/90 border border-white/10 space-y-3">
-          <div className="flex items-center justify-between text-slate-400">
-            <span className="text-xs font-medium uppercase tracking-wider">Reusable Offcuts</span>
-            <div className="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center">
+        <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-3">
+          <div className="flex items-center justify-between text-slate-500">
+            <span className="text-xs font-bold uppercase tracking-wider">Reusable Offcuts</span>
+            <div className="w-9 h-9 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center font-bold">
               <Repeat className="w-4 h-4" />
             </div>
           </div>
-          <div className="text-2xl font-extrabold text-amber-300">
-            {metrics?.availableRemnantsCount || 3} <span className="text-sm font-normal text-slate-400">pieces ({metrics?.remnantsSqFt || 46} sq ft)</span>
+          <div className="text-2xl sm:text-3xl font-black text-slate-900">
+            {metrics?.availableRemnantsCount || 3} <span className="text-sm font-semibold text-slate-500">pieces ({metrics?.remnantsSqFt || 46} sq ft)</span>
           </div>
-          <div className="text-xs text-slate-400">
-            Allocated salvage value: <strong>{formatINR(metrics?.remnantsValue || 2838)}</strong>
+          <div className="text-xs text-slate-500 font-medium">
+            Salvage value: <strong className="text-slate-800">{formatINR(metrics?.remnantsValue || 2838)}</strong>
           </div>
         </div>
 
         {/* 7. Scrap Recovery */}
-        <div className="p-5 rounded-2xl bg-slate-900/90 border border-white/10 space-y-3">
-          <div className="flex items-center justify-between text-slate-400">
-            <span className="text-xs font-medium uppercase tracking-wider">Scrap (Cullet)</span>
-            <div className="w-8 h-8 rounded-lg bg-slate-700 text-slate-300 flex items-center justify-center">
+        <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-3">
+          <div className="flex items-center justify-between text-slate-500">
+            <span className="text-xs font-bold uppercase tracking-wider">Scrap (Cullet)</span>
+            <div className="w-9 h-9 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center">
               <Trash2 className="w-4 h-4" />
             </div>
           </div>
-          <div className="text-2xl font-extrabold text-white">
+          <div className="text-2xl sm:text-3xl font-black text-slate-900">
             {formatINR(metrics?.scrapRevenue || 1575)}
           </div>
-          <div className="text-xs text-slate-400">
-            Stock in bin: <strong>{metrics?.scrapStockKg || 127} kg</strong>
+          <div className="text-xs text-slate-500 font-medium">
+            Stock in bin: <strong className="text-slate-800">{metrics?.scrapStockKg || 127} kg</strong>
           </div>
         </div>
 
         {/* 8. Pending Sales Orders */}
-        <div className="p-5 rounded-2xl bg-slate-900/90 border border-white/10 space-y-3">
-          <div className="flex items-center justify-between text-slate-400">
-            <span className="text-xs font-medium uppercase tracking-wider">Active Orders</span>
-            <div className="w-8 h-8 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center">
+        <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-3">
+          <div className="flex items-center justify-between text-slate-500">
+            <span className="text-xs font-bold uppercase tracking-wider">Active Orders</span>
+            <div className="w-9 h-9 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center">
               <Clock className="w-4 h-4" />
             </div>
           </div>
-          <div className="text-2xl font-extrabold text-white">
-            {metrics?.pendingOrdersCount || 1} <span className="text-sm font-normal text-slate-400">orders</span>
+          <div className="text-2xl sm:text-3xl font-black text-slate-900">
+            {metrics?.pendingOrdersCount || 1} <span className="text-sm font-semibold text-slate-500">orders</span>
           </div>
-          <div className="text-xs text-slate-400">
-            CRM Leads: <strong>{metrics?.leadsCount || 2}</strong>
+          <div className="text-xs text-slate-500 font-medium">
+            CRM Leads: <strong className="text-slate-800">{metrics?.leadsCount || 2}</strong>
           </div>
         </div>
 
         {/* 9. Customer Outstanding (Receivables) */}
-        <div className="p-5 rounded-2xl bg-slate-900/90 border border-white/10 space-y-3">
-          <div className="flex items-center justify-between text-slate-400">
-            <span className="text-xs font-medium uppercase tracking-wider">Customer Due (Receivable)</span>
-            <div className="w-8 h-8 rounded-lg bg-orange-500/20 text-orange-400 flex items-center justify-center">
+        <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-3">
+          <div className="flex items-center justify-between text-slate-500">
+            <span className="text-xs font-bold uppercase tracking-wider">Customer Due (Receivable)</span>
+            <div className="w-9 h-9 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center font-bold">
               <ArrowDownRight className="w-4 h-4" />
             </div>
           </div>
-          <div className="text-2xl font-extrabold text-orange-400">
+          <div className="text-2xl sm:text-3xl font-black text-amber-600">
             {formatINR(metrics?.customerOutstanding || 31950)}
           </div>
-          <div className="text-xs text-slate-400">
+          <div className="text-xs text-slate-500 font-medium">
             Pending collection from clients
           </div>
         </div>
 
         {/* 10. Supplier Outstanding (Payables) */}
-        <div className="p-5 rounded-2xl bg-slate-900/90 border border-white/10 space-y-3">
-          <div className="flex items-center justify-between text-slate-400">
-            <span className="text-xs font-medium uppercase tracking-wider">Supplier Due (Payable)</span>
-            <div className="w-8 h-8 rounded-lg bg-rose-500/20 text-rose-400 flex items-center justify-center">
+        <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-3">
+          <div className="flex items-center justify-between text-slate-500">
+            <span className="text-xs font-bold uppercase tracking-wider">Supplier Due (Payable)</span>
+            <div className="w-9 h-9 rounded-xl bg-red-50 text-red-600 flex items-center justify-center font-bold">
               <ArrowUpRight className="w-4 h-4" />
             </div>
           </div>
-          <div className="text-2xl font-extrabold text-rose-400">
+          <div className="text-2xl sm:text-3xl font-black text-red-600">
             {formatINR(metrics?.supplierOutstanding || 26540)}
           </div>
-          <div className="text-xs text-slate-400">
-            Pending payments to wholesale suppliers
+          <div className="text-xs text-slate-500 font-medium">
+            Pending to wholesale suppliers
           </div>
         </div>
 
         {/* 11. Operational Expenses */}
-        <div className="p-5 rounded-2xl bg-slate-900/90 border border-white/10 space-y-3">
-          <div className="flex items-center justify-between text-slate-400">
-            <span className="text-xs font-medium uppercase tracking-wider">Operating Expenses</span>
-            <div className="w-8 h-8 rounded-lg bg-slate-800 text-slate-300 flex items-center justify-center">
+        <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-3">
+          <div className="flex items-center justify-between text-slate-500">
+            <span className="text-xs font-bold uppercase tracking-wider">Operating Expenses</span>
+            <div className="w-9 h-9 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center">
               <ShoppingCart className="w-4 h-4" />
             </div>
           </div>
-          <div className="text-2xl font-extrabold text-white">
+          <div className="text-2xl sm:text-3xl font-black text-slate-900">
             {formatINR(metrics?.totalExpenses || 13200)}
           </div>
-          <div className="text-xs text-slate-400">
-            Labor, electricity, freight, and tools
+          <div className="text-xs text-slate-500 font-medium">
+            Labor, electricity, freight &amp; consumables
           </div>
         </div>
 
         {/* 12. Smart Cutting Salvage Rate */}
-        <div className="p-5 rounded-2xl bg-slate-900/90 border border-teal-500/30 space-y-3 bg-teal-950/10">
-          <div className="flex items-center justify-between text-slate-400">
-            <span className="text-xs font-medium uppercase tracking-wider text-teal-300">Offcut Salvage Efficiency</span>
-            <div className="w-8 h-8 rounded-lg bg-teal-500/30 text-teal-300 flex items-center justify-center">
+        <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-3">
+          <div className="flex items-center justify-between text-slate-500">
+            <span className="text-xs font-bold uppercase tracking-wider">Cutting Salvage Rate</span>
+            <div className="w-9 h-9 rounded-xl bg-red-50 text-[#8B1E2D] flex items-center justify-center font-bold">
               <Scissors className="w-4 h-4" />
             </div>
           </div>
-          <div className="text-2xl font-extrabold text-teal-300">
+          <div className="text-2xl sm:text-3xl font-black text-[#8B1E2D]">
             94.8%
           </div>
-          <div className="text-xs text-teal-400/80">
+          <div className="text-xs text-slate-500 font-medium">
             Only 5.2% converted to scrap cullet
           </div>
         </div>
@@ -315,39 +314,41 @@ export default function AdminDashboardPage() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
         {/* Monthly Revenue vs Purchases Chart */}
-        <div className="lg:col-span-8 p-6 rounded-3xl bg-slate-900 border border-white/10 space-y-4">
+        <div className="lg:col-span-8 p-7 rounded-3xl bg-white border border-slate-200/90 shadow-sm space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-base font-bold text-white">Monthly Sales, Purchases &amp; Profit</h3>
-              <p className="text-xs text-slate-400">Financial performance tracking in Indian Rupees (₹)</p>
+              <h3 className="text-lg font-extrabold text-slate-900">Monthly Sales, Purchases &amp; Profit</h3>
+              <p className="text-xs text-slate-500">Financial performance tracking in Indian Rupees (₹)</p>
             </div>
-            <span className="text-xs text-teal-400 font-mono font-medium">H2 FY 2026</span>
+            <span className="text-xs text-[#8B1E2D] font-bold font-mono px-2.5 py-1 rounded-full bg-red-50 border border-red-200">
+              FY 2026
+            </span>
           </div>
 
           <div className="h-72 w-full pt-4">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={monthlyFinancialData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
-                <XAxis dataKey="month" stroke="#94a3b8" fontSize={11} />
-                <YAxis stroke="#94a3b8" fontSize={11} tickFormatter={(val) => `₹${val / 1000}k`} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
+                <XAxis dataKey="month" stroke="#64748b" fontSize={11} fontWeight="bold" />
+                <YAxis stroke="#64748b" fontSize={11} tickFormatter={(val) => `₹${val / 1000}k`} />
                 <Tooltip
-                  contentStyle={{ backgroundColor: '#0f172a', borderColor: '#334155', borderRadius: '0.75rem', fontSize: '12px' }}
+                  contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', borderRadius: '0.75rem', fontSize: '12px', boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}
                   formatter={(val: any) => [formatINR(val), '']}
                 />
-                <Legend wrapperStyle={{ fontSize: '11px', paddingTop: '10px' }} />
-                <Bar dataKey="sales" name="Sales Revenue" fill="#0D9488" radius={[4, 4, 0, 0]} />
-                <Bar dataKey="purchases" name="Purchases" fill="#3B82F6" radius={[4, 4, 0, 0]} />
-                <Bar dataKey="profit" name="Net Profit" fill="#10B981" radius={[4, 4, 0, 0]} />
+                <Legend wrapperStyle={{ fontSize: '12px', paddingTop: '10px' }} />
+                <Bar dataKey="sales" name="Sales Revenue" fill="#8B1E2D" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="purchases" name="Purchases" fill="#334155" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="profit" name="Net Profit" fill="#059669" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
         </div>
 
         {/* Stock Distribution Donut Chart */}
-        <div className="lg:col-span-4 p-6 rounded-3xl bg-slate-900 border border-white/10 space-y-4 flex flex-col justify-between">
+        <div className="lg:col-span-4 p-7 rounded-3xl bg-white border border-slate-200/90 shadow-sm space-y-4 flex flex-col justify-between">
           <div>
-            <h3 className="text-base font-bold text-white">Inventory Breakdown</h3>
-            <p className="text-xs text-slate-400">Current square-footage by glass category</p>
+            <h3 className="text-lg font-extrabold text-slate-900">Inventory Breakdown</h3>
+            <p className="text-xs text-slate-500">Current square-footage by glass category</p>
           </div>
 
           <div className="h-60 w-full">
@@ -367,17 +368,17 @@ export default function AdminDashboardPage() {
                   ))}
                 </Pie>
                 <Tooltip
-                  contentStyle={{ backgroundColor: '#0f172a', borderColor: '#334155', borderRadius: '0.5rem', fontSize: '12px' }}
+                  contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', borderRadius: '0.5rem', fontSize: '12px' }}
                   formatter={(val: any) => [`${val}%`, 'Share']}
                 />
               </PieChart>
             </ResponsiveContainer>
           </div>
 
-          <div className="grid grid-cols-2 gap-2 text-[11px] pt-2 border-t border-white/10">
+          <div className="grid grid-cols-2 gap-2 text-xs pt-3 border-t border-slate-100 font-semibold">
             {stockDistributionData.map((item) => (
-              <div key={item.name} className="flex items-center gap-1.5 text-slate-300">
-                <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: item.color }} />
+              <div key={item.name} className="flex items-center gap-2 text-slate-700">
+                <span className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }} />
                 <span className="truncate">{item.name}</span>
               </div>
             ))}
@@ -392,13 +393,15 @@ export default function AdminDashboardPage() {
         {/* Quick Cutting Job Action */}
         <Link
           href="/admin/cutting"
-          className="p-6 rounded-2xl bg-gradient-to-br from-teal-950/40 to-slate-900 border border-teal-500/30 hover:border-teal-400 transition-all group"
+          className="p-7 rounded-3xl bg-white border border-slate-200 hover:border-[#8B1E2D]/50 hover:shadow-card transition-all group"
         >
-          <div className="w-10 h-10 rounded-xl bg-teal-500/20 text-teal-300 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-            <Scissors className="w-5 h-5" />
+          <div className="w-12 h-12 rounded-2xl bg-red-50 text-[#8B1E2D] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <Scissors className="w-6 h-6" />
           </div>
-          <h4 className="text-base font-bold text-white mb-1">Smart Glass Cutting Module</h4>
-          <p className="text-xs text-slate-400">
+          <h4 className="text-lg font-extrabold text-slate-900 mb-1 group-hover:text-[#8B1E2D] transition-colors">
+            Smart Glass Cutting Engine
+          </h4>
+          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
             Enter cut dimensions, verify geometric fit, view visual 2D layout, and auto-catalog offcut remnants.
           </p>
         </Link>
@@ -406,13 +409,15 @@ export default function AdminDashboardPage() {
         {/* Stock Remnants Search */}
         <Link
           href="/admin/remnants"
-          className="p-6 rounded-2xl bg-gradient-to-br from-blue-950/40 to-slate-900 border border-blue-500/30 hover:border-blue-400 transition-all group"
+          className="p-7 rounded-3xl bg-white border border-slate-200 hover:border-[#8B1E2D]/50 hover:shadow-card transition-all group"
         >
-          <div className="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-300 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-            <Repeat className="w-5 h-5" />
+          <div className="w-12 h-12 rounded-2xl bg-red-50 text-[#8B1E2D] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <Repeat className="w-6 h-6" />
           </div>
-          <h4 className="text-base font-bold text-white mb-1">Reusable Remnant Stock</h4>
-          <p className="text-xs text-slate-400">
+          <h4 className="text-lg font-extrabold text-slate-900 mb-1 group-hover:text-[#8B1E2D] transition-colors">
+            Reusable Remnant Stock
+          </h4>
+          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
             Browse and match salvaged pieces from previous cuts before ordering or cutting full sheets.
           </p>
         </Link>
@@ -420,13 +425,15 @@ export default function AdminDashboardPage() {
         {/* GST Invoicing & Billing */}
         <Link
           href="/admin/invoices"
-          className="p-6 rounded-2xl bg-gradient-to-br from-purple-950/40 to-slate-900 border border-purple-500/30 hover:border-purple-400 transition-all group"
+          className="p-7 rounded-3xl bg-white border border-slate-200 hover:border-[#8B1E2D]/50 hover:shadow-card transition-all group"
         >
-          <div className="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-300 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-            <FileSpreadsheet className="w-5 h-5" />
+          <div className="w-12 h-12 rounded-2xl bg-red-50 text-[#8B1E2D] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <FileSpreadsheet className="w-6 h-6" />
           </div>
-          <h4 className="text-base font-bold text-white mb-1">Tax Invoices &amp; Payments</h4>
-          <p className="text-xs text-slate-400">
+          <h4 className="text-lg font-extrabold text-slate-900 mb-1 group-hover:text-[#8B1E2D] transition-colors">
+            Tax Invoices &amp; Payments
+          </h4>
+          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
             Generate Telangana GST (18%) tax invoices, record UPI/NEFT receipts, and manage customer credit balances.
           </p>
         </Link>
@@ -436,4 +443,3 @@ export default function AdminDashboardPage() {
     </div>
   );
 }
-

@@ -8,7 +8,7 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex">
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex font-sans">
       {/* Fixed Sidebar */}
       <AdminSidebar />
 
@@ -22,4 +22,3 @@ export default function AdminLayout({
     </div>
   );
 }
-
