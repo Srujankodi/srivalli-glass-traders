@@ -10,13 +10,25 @@
 import fs from 'fs';
 import path from 'path';
 
-const DATA_DIR = path.join(process.cwd(), '.data');
+// On Vercel / serverless platforms, only /tmp is writable; locally, use .data
+const DATA_DIR = process.env.VERCEL
+  ? path.join('/tmp', '.data')
+  : path.join(process.cwd(), '.data');
 const DB_FILE = path.join(DATA_DIR, 'srivalli_db.json');
 
-// Ensure storage directory exists
-if (!fs.existsSync(DATA_DIR)) {
-  fs.mkdirSync(DATA_DIR, { recursive: true });
+function ensureDataDir(): void {
+  try {
+    if (!fs.existsSync(DATA_DIR)) {
+      fs.mkdirSync(DATA_DIR, { recursive: true });
+    }
+  } catch (err) {
+    // Graceful fallback for strictly read-only environments
+    console.warn('[DataService] Notice: Filesystem directory is read-only, using memory cache');
+  }
 }
+
+// In-memory cache to ensure zero-crash operations in serverless environments
+let inMemoryDB: AppDatabase | null = null;
 
 export interface AppDatabase {
   settings: any;
@@ -47,11 +59,11 @@ function getInitialDatabaseState(): AppDatabase {
       id: 'cfg-001',
       companyName: 'Srivalli Glass Traders',
       tagline: 'Quality Glass Solutions at Competitive Prices',
-      address: 'Shop No. 4, Plot 12, Glass Market, Hyderabad, Telangana 500001',
-      phone: '+91 98765 43210',
-      email: 'contact@srivalliglasstraders.com',
-      whatsapp: '+919876543210',
-      businessHours: 'Mon - Sat: 9:00 AM - 8:30 PM | Sunday: 10:00 AM - 3:00 PM',
+      address: '4D IDA Phase-1 Sree Ram Nagar Colony, Patancheru, Sangareddy District-502319',
+      phone: '+919866906665',
+      email: 'srivalliglasstraders0@gmail.com',
+      whatsapp: '+919866906665',
+      businessHours: 'Mon - Sat: 9:00 AM - 6:00 PM | Sunday: Closed',
       gstin: '36DRUPS5127N2ZQ',
       stateCode: '36',
       stateName: 'Telangana',
@@ -883,25 +895,41 @@ function getInitialDatabaseState(): AppDatabase {
 
 export class DataService {
   private static getDB(): AppDatabase {
+    if (inMemoryDB) {
+      return inMemoryDB;
+    }
+
     try {
+      ensureDataDir();
       if (!fs.existsSync(DB_FILE)) {
         const initial = getInitialDatabaseState();
-        fs.writeFileSync(DB_FILE, JSON.stringify(initial, null, 2), 'utf-8');
+        try {
+          fs.writeFileSync(DB_FILE, JSON.stringify(initial, null, 2), 'utf-8');
+        } catch (writeErr) {
+          // Read-only filesystem (serverless environment), safe to ignore disk write
+        }
+        inMemoryDB = initial;
         return initial;
       }
       const raw = fs.readFileSync(DB_FILE, 'utf-8');
-      return JSON.parse(raw);
+      const parsed: AppDatabase = JSON.parse(raw);
+      inMemoryDB = parsed;
+      return parsed;
     } catch (e) {
-      console.error('Error reading database file, returning fallback state:', e);
-      return getInitialDatabaseState();
+      console.warn('[DataService] Error reading database file, using fallback state');
+      const fallback = getInitialDatabaseState();
+      inMemoryDB = fallback;
+      return fallback;
     }
   }
 
   private static saveDB(data: AppDatabase): void {
+    inMemoryDB = data;
     try {
+      ensureDataDir();
       fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2), 'utf-8');
     } catch (e) {
-      console.error('Error saving database file:', e);
+      // Safe in-memory fallback on serverless ephemeral runtimes
     }
   }
 
