@@ -59,11 +59,10 @@ export default function AdminHeader() {
         {/* User Badge */}
         <div className="pl-3 border-l border-slate-200 flex items-center space-x-2.5">
           <div className="w-8 h-8 rounded-full bg-[#8B1E2D] text-white flex items-center justify-center font-black text-xs shadow-xs">
-            SK
+            S
           </div>
-          <div className="hidden lg:block text-left">
-            <span className="text-xs font-bold text-slate-900 block leading-tight">Srivalli Kumar</span>
-            <span className="text-[10px] text-[#8B1E2D] font-extrabold block leading-tight">Proprietor (Owner)</span>
+          <div className="text-left">
+            <span className="text-xs font-extrabold text-slate-900 block leading-tight">Srivalli</span>
           </div>
         </div>
 
