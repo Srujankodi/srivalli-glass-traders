@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: 'Srivalli Glass Traders | Hyderabad Glass Trading & Cutting Specialists',
   description: 'Srivalli Glass Traders - Quality glass solutions at competitive prices in Hyderabad, Telangana. Wholesale float glass, toughened glass, custom cutting, mirrors, and remnants.',
   keywords: 'glass traders hyderabad, toughened glass, clear float glass, glass cutting hyderabad, mirror glass, glass suppliers telangana',
+  verification: {
+    google: 'google3190346c3ce8d0b8',
+  },
 };
 
 export default function RootLayout({
