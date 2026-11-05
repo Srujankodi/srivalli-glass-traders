@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MapPin, Phone, Mail, Clock, MessageSquare, Send, CheckCircle2, Building2 } from 'lucide-react';
 import PublicNavbar from '@/components/public/Navbar';
 import PublicFooter from '@/components/public/Footer';
@@ -11,93 +11,117 @@ export default function ContactPage() {
   const [message, setMessage] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
+  const [companyAddress, setCompanyAddress] = useState('Shop No. 4, Plot 12, Glass Market, Hyderabad, Telangana 500001, India');
+  const [companyPhone, setCompanyPhone] = useState('+91 98765 43210');
+  const [companyEmail, setCompanyEmail] = useState('contact@srivalliglasstraders.com');
+  const [companyHours, setCompanyHours] = useState('Monday – Saturday: 9:00 AM – 8:30 PM | Sunday: 10:00 AM – 3:00 PM');
+  const [companyGstin, setCompanyGstin] = useState('36AAAAA0000A1Z5');
+
+  useEffect(() => {
+    fetch('/api/settings')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.settings) {
+          const s = data.settings;
+          if (s.address) setCompanyAddress(s.address);
+          if (s.phone) setCompanyPhone(s.phone);
+          if (s.email) setCompanyEmail(s.email);
+          if (s.businessHours) setCompanyHours(s.businessHours);
+          if (s.gstin) setCompanyGstin(s.gstin);
+        }
+      })
+      .catch((e) => console.error(e));
+  }, []);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-900 text-slate-100">
+    <div className="min-h-screen flex flex-col bg-slate-950 text-slate-100 font-sans selection:bg-teal-600 selection:text-white">
       <PublicNavbar />
 
-      {/* Header */}
-      <section className="bg-gradient-to-b from-brand-navyDark via-brand-navy to-slate-900 py-16 border-b border-white/10">
+      {/* Header Banner */}
+      <section className="bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 py-16 sm:py-24 border-b border-teal-500/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
-          <span className="text-xs font-bold uppercase tracking-wider text-brand-tealGlow">
-            Visit or Call Us
+          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-bold bg-teal-950/80 text-teal-300 border border-teal-500/30">
+            Direct Hyderabad Depot Contact
           </span>
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">
+          <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
             Contact Srivalli Glass Traders
           </h1>
-          <p className="text-slate-300 max-w-2xl mx-auto text-sm sm:text-base">
-            Reach out for wholesale glass sheets, custom residential glass cuts, or onsite commercial project consultations in Hyderabad.
+          <p className="text-slate-300 max-w-3xl mx-auto text-base sm:text-lg leading-relaxed">
+            Reach out for wholesale glass sheets, custom residential glass cuts, or onsite commercial project consultations in Hyderabad and Secunderabad.
           </p>
         </div>
       </section>
 
       {/* Contact Grid */}
-      <section className="py-16 bg-slate-900 flex-1">
+      <section className="py-16 sm:py-20 bg-slate-950 flex-1">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
             
             {/* Contact Details Card */}
             <div className="lg:col-span-5 space-y-6">
-              <div className="p-6 rounded-3xl bg-slate-800/60 border border-white/10 space-y-6">
-                <h3 className="text-xl font-bold text-white">Workshop &amp; Trading Office</h3>
+              <div className="p-7 sm:p-9 rounded-3xl bg-slate-900 border border-teal-500/25 space-y-7 shadow-2xl">
+                <h3 className="text-2xl font-bold text-white flex items-center gap-2.5 pb-4 border-b border-white/10">
+                  <Building2 className="w-6 h-6 text-teal-400" />
+                  <span>Depot &amp; Workshop</span>
+                </h3>
 
-                <div className="space-y-4 text-sm">
-                  <div className="flex items-start space-x-3">
-                    <MapPin className="w-5 h-5 text-brand-tealGlow shrink-0 mt-0.5" />
+                <div className="space-y-5 text-sm sm:text-base">
+                  <div className="flex items-start space-x-3.5">
+                    <MapPin className="w-5 h-5 text-teal-400 shrink-0 mt-1" />
                     <div>
-                      <strong className="text-white block">Physical Location:</strong>
-                      <span className="text-slate-300 leading-relaxed text-xs">
-                        Shop No. 4, Plot 12, Glass Market, Hyderabad, Telangana 500001, India
+                      <strong className="text-white block font-semibold">Physical Workshop Location:</strong>
+                      <span className="text-slate-300 leading-relaxed text-sm mt-0.5 block">
+                        {companyAddress}
                       </span>
                     </div>
                   </div>
 
-                  <div className="flex items-center space-x-3">
-                    <Phone className="w-5 h-5 text-brand-tealGlow shrink-0" />
+                  <div className="flex items-start space-x-3.5">
+                    <Phone className="w-5 h-5 text-teal-400 shrink-0 mt-1" />
                     <div>
-                      <strong className="text-white block">Phone Consultation:</strong>
-                      <a href="tel:+919876543210" className="text-brand-tealGlow hover:underline text-xs">
-                        +91 98765 43210
+                      <strong className="text-white block font-semibold">Phone Consultation:</strong>
+                      <a href={`tel:${companyPhone.replace(/[^0-9+]/g, '')}`} className="text-teal-300 hover:underline font-bold text-base mt-0.5 block">
+                        {companyPhone}
                       </a>
                     </div>
                   </div>
 
-                  <div className="flex items-center space-x-3">
-                    <MessageSquare className="w-5 h-5 text-emerald-400 shrink-0" />
+                  <div className="flex items-start space-x-3.5">
+                    <MessageSquare className="w-5 h-5 text-emerald-400 shrink-0 mt-1" />
                     <div>
-                      <strong className="text-white block">WhatsApp Direct:</strong>
+                      <strong className="text-white block font-semibold">WhatsApp Direct:</strong>
                       <a
-                        href="https://wa.me/919876543210"
+                        href={`https://wa.me/${companyPhone.replace(/[^0-9]/g, '')}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-emerald-400 hover:underline text-xs"
+                        className="text-emerald-400 hover:underline font-bold text-base mt-0.5 block"
                       >
-                        +91 98765 43210
+                        {companyPhone}
                       </a>
                     </div>
                   </div>
 
-                  <div className="flex items-center space-x-3">
-                    <Mail className="w-5 h-5 text-brand-tealGlow shrink-0" />
+                  <div className="flex items-start space-x-3.5">
+                    <Mail className="w-5 h-5 text-teal-400 shrink-0 mt-1" />
                     <div>
-                      <strong className="text-white block">Email:</strong>
-                      <a href="mailto:contact@srivalliglasstraders.com" className="text-slate-300 hover:underline text-xs">
-                        contact@srivalliglasstraders.com
+                      <strong className="text-white block font-semibold">Email:</strong>
+                      <a href={`mailto:${companyEmail}`} className="text-slate-300 hover:text-white text-sm mt-0.5 block">
+                        {companyEmail}
                       </a>
                     </div>
                   </div>
 
-                  <div className="flex items-start space-x-3 pt-2 border-t border-white/10">
-                    <Clock className="w-5 h-5 text-brand-tealGlow shrink-0 mt-0.5" />
+                  <div className="flex items-start space-x-3.5 pt-4 border-t border-white/10">
+                    <Clock className="w-5 h-5 text-teal-400 shrink-0 mt-1" />
                     <div>
-                      <strong className="text-white block">Operating Hours:</strong>
-                      <span className="text-slate-300 text-xs leading-normal">
-                        Monday – Saturday: 9:00 AM – 8:30 PM<br />
-                        Sunday: 10:00 AM – 3:00 PM
+                      <strong className="text-white block font-semibold">Operating Hours:</strong>
+                      <span className="text-slate-300 text-sm leading-normal mt-0.5 block">
+                        {companyHours}
                       </span>
                     </div>
                   </div>
@@ -105,52 +129,52 @@ export default function ContactPage() {
                 </div>
 
                 <div className="pt-2">
-                  <span className="inline-block px-3 py-1.5 rounded-xl text-xs bg-slate-900 border border-white/10 text-slate-300">
-                    GSTIN: <strong>36AAAAA0000A1Z5</strong> (Telangana)
+                  <span className="inline-block px-4 py-2 rounded-2xl text-xs sm:text-sm font-semibold bg-slate-950 border border-teal-500/30 text-teal-300">
+                    GSTIN: <strong>{companyGstin}</strong> (Telangana)
                   </span>
                 </div>
               </div>
             </div>
 
             {/* Quick Inquiry Form */}
-            <div className="lg:col-span-7 p-6 sm:p-8 rounded-3xl bg-slate-800/60 border border-white/10">
+            <div className="lg:col-span-7 p-7 sm:p-9 rounded-3xl bg-slate-900 border border-teal-500/25 shadow-2xl">
               {submitted ? (
-                <div className="py-12 text-center space-y-4">
-                  <div className="w-14 h-14 rounded-2xl bg-teal-500/20 text-brand-tealGlow flex items-center justify-center mx-auto">
-                    <CheckCircle2 className="w-7 h-7" />
+                <div className="py-14 text-center space-y-4">
+                  <div className="w-16 h-16 rounded-2xl bg-teal-500/20 text-teal-300 flex items-center justify-center mx-auto border border-teal-500/40">
+                    <CheckCircle2 className="w-8 h-8 text-emerald-400" />
                   </div>
-                  <h3 className="text-xl font-bold text-white">Message Received!</h3>
-                  <p className="text-xs text-slate-300 max-w-md mx-auto">
-                    Thank you, {name}. Our sales incharge will contact you shortly regarding your glass requirement.
+                  <h3 className="text-2xl font-bold text-white">Inquiry Received!</h3>
+                  <p className="text-sm sm:text-base text-slate-300 max-w-md mx-auto leading-relaxed">
+                    Thank you, <strong className="text-white">{name}</strong>. Our Hyderabad sales desk has logged your requirement and will contact you promptly.
                   </p>
                   <button
                     onClick={() => setSubmitted(false)}
-                    className="px-4 py-2 rounded-xl text-xs font-semibold bg-white/10 hover:bg-white/15 text-white"
+                    className="px-6 py-3 rounded-xl text-sm font-bold bg-white/10 hover:bg-white/20 text-white transition-colors"
                   >
                     Send Another Message
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <h3 className="text-xl font-bold text-white mb-2">Send an Inquiry</h3>
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  <h3 className="text-2xl font-bold text-white mb-2 pb-3 border-b border-white/10">Send an Inquiry</h3>
                   
                   <div>
-                    <label className="block text-xs font-medium text-slate-300 mb-1">
-                      Your Name *
+                    <label className="block text-sm font-bold text-slate-200 mb-1.5">
+                      Your Name / Enterprise *
                     </label>
                     <input
                       type="text"
                       required
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      placeholder="e.g. Anand Sharma"
-                      className="w-full px-3.5 py-2.5 rounded-xl text-xs bg-slate-900 border border-white/15 text-white placeholder-slate-500 focus:outline-none focus:border-brand-teal"
+                      placeholder="e.g. Anand Sharma / Modern Glaziers"
+                      className="w-full px-4 py-3 rounded-xl text-sm bg-slate-950 border border-slate-700 text-white placeholder-slate-400 focus:outline-none focus:border-teal-400 font-medium"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-medium text-slate-300 mb-1">
-                      Phone Number *
+                    <label className="block text-sm font-bold text-slate-200 mb-1.5">
+                      Phone Number (WhatsApp) *
                     </label>
                     <input
                       type="tel"
@@ -158,30 +182,30 @@ export default function ContactPage() {
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       placeholder="e.g. 98490 12345"
-                      className="w-full px-3.5 py-2.5 rounded-xl text-xs bg-slate-900 border border-white/15 text-white placeholder-slate-500 focus:outline-none focus:border-brand-teal"
+                      className="w-full px-4 py-3 rounded-xl text-sm bg-slate-950 border border-slate-700 text-white placeholder-slate-400 focus:outline-none focus:border-teal-400 font-medium"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-medium text-slate-300 mb-1">
-                      Message / Project Details *
+                    <label className="block text-sm font-bold text-slate-200 mb-1.5">
+                      Message / Custom Dimensions / Project Requirements *
                     </label>
                     <textarea
-                      rows={4}
+                      rows={5}
                       required
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
-                      placeholder="Specify required glass types, thicknesses, or delivery requirements in Hyderabad..."
-                      className="w-full px-3.5 py-2.5 rounded-xl text-xs bg-slate-900 border border-white/15 text-white placeholder-slate-500 focus:outline-none focus:border-brand-teal"
+                      placeholder="Specify required glass varieties, thicknesses, dimensions, or site delivery location in Hyderabad..."
+                      className="w-full px-4 py-3 rounded-xl text-sm bg-slate-950 border border-slate-700 text-white placeholder-slate-400 focus:outline-none focus:border-teal-400 font-medium leading-relaxed"
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full py-3 rounded-xl text-xs font-semibold bg-teal-600 hover:bg-teal-500 text-white transition-all flex items-center justify-center gap-2 shadow-sm"
+                    className="w-full py-4 rounded-xl text-base font-bold bg-gradient-to-r from-teal-600 to-teal-500 hover:from-teal-500 hover:to-teal-400 text-white transition-all flex items-center justify-center gap-2 shadow-xl hover:shadow-teal-500/25"
                   >
-                    <Send className="w-3.5 h-3.5" />
-                    <span>Send Message to Workshop</span>
+                    <Send className="w-5 h-5" />
+                    <span>Send Inquiry to Workshop</span>
                   </button>
                 </form>
               )}
@@ -195,4 +219,3 @@ export default function ContactPage() {
     </div>
   );
 }
-

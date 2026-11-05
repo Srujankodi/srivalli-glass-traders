@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Settings, 
   Save, 
@@ -19,7 +19,7 @@ export default function AdminSettingsPage() {
   const [address, setAddress] = useState('Shop No. 4, Plot 12, Glass Market, Hyderabad, Telangana 500001');
   const [phone, setPhone] = useState('+91 98765 43210');
   const [email, setEmail] = useState('contact@srivalliglasstraders.com');
-  const [whatsapp, setWhatsapp] = useState('+91 98765 43210');
+  const [whatsapp, setWhatsapp] = useState('+919876543210');
   const [businessHours, setBusinessHours] = useState('Mon - Sat: 9:00 AM - 8:30 PM | Sunday: 10:00 AM - 3:00 PM');
   const [gstin, setGstin] = useState('36AAAAA0000A1Z5');
   const [stateCode, setStateCode] = useState('36');
@@ -27,41 +27,88 @@ export default function AdminSettingsPage() {
   const [cuttingLossMm, setCuttingLossMm] = useState('3.0');
   const [minRemnantAreaSqFt, setMinRemnantAreaSqFt] = useState('2.0');
 
+  const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
 
-  const handleSave = (e: React.FormEvent) => {
+  useEffect(() => {
+    fetch('/api/settings')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.settings) {
+          const s = data.settings;
+          if (s.companyName) setCompanyName(s.companyName);
+          if (s.tagline) setTagline(s.tagline);
+          if (s.address) setAddress(s.address);
+          if (s.phone) setPhone(s.phone);
+          if (s.email) setEmail(s.email);
+          if (s.whatsapp) setWhatsapp(s.whatsapp);
+          if (s.businessHours) setBusinessHours(s.businessHours);
+          if (s.gstin) setGstin(s.gstin);
+          if (s.stateCode) setStateCode(s.stateCode);
+          if (s.defaultGstRate) setDefaultGstRate(String(s.defaultGstRate));
+          if (s.cuttingLossMm) setCuttingLossMm(String(s.cuttingLossMm));
+          if (s.minRemnantAreaSqFt) setMinRemnantAreaSqFt(String(s.minRemnantAreaSqFt));
+        }
+      })
+      .catch((e) => console.error(e));
+  }, []);
+
+  const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSaved(true);
-    setTimeout(() => setSaved(false), 3000);
+    setSaving(true);
+    try {
+      const res = await fetch('/api/settings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          companyName,
+          tagline,
+          address,
+          phone,
+          email,
+          whatsapp,
+          businessHours,
+          gstin,
+          stateCode,
+          defaultGstRate: parseFloat(defaultGstRate),
+          cuttingLossMm: parseFloat(cuttingLossMm),
+          minRemnantAreaSqFt: parseFloat(minRemnantAreaSqFt),
+        }),
+      });
+
+      if (res.ok) {
+        setSaved(true);
+        setTimeout(() => setSaved(false), 3500);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (
     <div className="space-y-8 max-w-4xl">
-      
-      {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-3xl bg-slate-900 border border-white/10">
         <div>
           <h1 className="text-2xl font-extrabold text-white flex items-center gap-2">
             <Settings className="w-6 h-6 text-teal-400" />
-            <span>Business Profile &amp; ERP Settings</span>
+            <span>Business Profile &amp; Website Settings</span>
           </h1>
           <p className="text-xs text-slate-400 mt-1">
-            Configure Hyderabad workshop contact details, GSTIN registration parameters, and glass cutting kerf loss allowances.
+            Updating details here directly changes the public customer website, WhatsApp chat links, and tax invoice headers on refresh.
           </p>
         </div>
 
         {saved && (
           <div className="px-3.5 py-1.5 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs flex items-center gap-1.5">
             <CheckCircle2 className="w-4 h-4" />
-            <span>Settings Saved!</span>
+            <span>Saved &amp; Updated Live on Website!</span>
           </div>
         )}
       </div>
 
-      {/* Settings Form */}
       <form onSubmit={handleSave} className="space-y-6">
-        
-        {/* Company Identification */}
         <div className="p-6 rounded-3xl bg-slate-900 border border-white/10 space-y-4">
           <h2 className="text-base font-bold text-white flex items-center gap-2">
             <Building2 className="w-4 h-4 text-teal-400" />
@@ -100,7 +147,6 @@ export default function AdminSettingsPage() {
           </div>
         </div>
 
-        {/* Contact & WhatsApp */}
         <div className="p-6 rounded-3xl bg-slate-900 border border-white/10 space-y-4">
           <h2 className="text-base font-bold text-white flex items-center gap-2">
             <Phone className="w-4 h-4 text-teal-400" />
@@ -109,7 +155,7 @@ export default function AdminSettingsPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
             <div>
-              <label className="block text-slate-300 mb-1">Official Phone</label>
+              <label className="block text-slate-300 mb-1">Official Phone Number</label>
               <input
                 type="text"
                 value={phone}
@@ -148,7 +194,6 @@ export default function AdminSettingsPage() {
           </div>
         </div>
 
-        {/* GST & Taxation */}
         <div className="p-6 rounded-3xl bg-slate-900 border border-white/10 space-y-4">
           <h2 className="text-base font-bold text-white flex items-center gap-2">
             <Percent className="w-4 h-4 text-teal-400" />
@@ -187,7 +232,6 @@ export default function AdminSettingsPage() {
           </div>
         </div>
 
-        {/* Cutting Parameters */}
         <div className="p-6 rounded-3xl bg-slate-900 border border-white/10 space-y-4">
           <h2 className="text-base font-bold text-white flex items-center gap-2">
             <Scissors className="w-4 h-4 text-teal-400" />
@@ -204,7 +248,6 @@ export default function AdminSettingsPage() {
                 onChange={(e) => setCuttingLossMm(e.target.value)}
                 className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800 border border-white/15 text-white font-mono"
               />
-              <span className="text-[10px] text-slate-400 mt-1 block">Default score and wheel breakout width (2mm - 3mm)</span>
             </div>
             <div>
               <label className="block text-slate-300 mb-1">Minimum Remnant Area for Salvage (sq ft)</label>
@@ -215,25 +258,21 @@ export default function AdminSettingsPage() {
                 onChange={(e) => setMinRemnantAreaSqFt(e.target.value)}
                 className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800 border border-white/15 text-white font-mono"
               />
-              <span className="text-[10px] text-slate-400 mt-1 block">Offcuts below this area are automatically classified as Scrap Cullet</span>
             </div>
           </div>
         </div>
 
-        {/* Submit Button */}
         <div className="flex justify-end pt-2">
           <button
             type="submit"
-            className="px-6 py-3 rounded-xl text-xs font-semibold bg-teal-600 hover:bg-teal-500 text-white flex items-center gap-2 shadow-glassHover transition-all"
+            disabled={saving}
+            className="px-6 py-3 rounded-xl text-xs font-semibold bg-teal-600 hover:bg-teal-500 text-white flex items-center gap-2 shadow-glassHover transition-all disabled:opacity-50"
           >
             <Save className="w-4 h-4" />
-            <span>Save ERP Configuration</span>
+            <span>{saving ? 'Saving...' : 'Save ERP Configuration'}</span>
           </button>
         </div>
-
       </form>
-
     </div>
   );
 }
-
