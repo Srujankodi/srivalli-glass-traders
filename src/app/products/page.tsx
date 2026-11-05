@@ -163,30 +163,30 @@ export default function ProductsPage() {
   }, [productsList, selectedCat, selectedThickness, searchQuery]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-950 text-slate-100 font-sans selection:bg-teal-600 selection:text-white">
+    <div className="min-h-screen flex flex-col bg-white text-slate-900 font-sans selection:bg-[#8B1E2D] selection:text-white">
       <PublicNavbar />
 
-      {/* Header Banner */}
-      <section className="bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 py-16 sm:py-20 border-b border-teal-500/20">
+      {/* Header Banner in clean off-white */}
+      <section className="bg-slate-50 py-16 sm:py-20 border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
-          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-bold bg-teal-950/80 text-teal-300 border border-teal-500/30">
-            Commercial Glass Catalog &bull; Hyderabad
-          </span>
-          <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+          <p className="font-serif italic tracking-[0.25em] text-slate-500 text-sm uppercase font-semibold">
+            G L A S S &nbsp; C A T A L O G
+          </p>
+          <h1 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
             Our Glass Products &amp; Specifications
           </h1>
-          <p className="text-slate-300 max-w-3xl mx-auto text-base sm:text-lg leading-relaxed">
+          <p className="text-slate-600 max-w-3xl mx-auto text-base sm:text-lg leading-relaxed">
             Browse our available glass inventory. Every item can be precisely cut to your custom measurements in feet, inches, centimeters, or millimeters.
           </p>
         </div>
       </section>
 
       {/* Filter & Catalog Section */}
-      <section className="py-12 sm:py-16 bg-slate-950 flex-1">
+      <section className="py-12 sm:py-16 bg-white flex-1">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           
           {/* Filter Bar */}
-          <div className="p-5 sm:p-6 rounded-3xl bg-slate-900 border border-teal-500/20 flex flex-col lg:flex-row items-center justify-between gap-4 shadow-xl">
+          <div className="p-5 sm:p-6 rounded-3xl bg-slate-50 border border-slate-200 flex flex-col lg:flex-row items-center justify-between gap-4 shadow-sm">
             
             {/* Search */}
             <div className="relative w-full lg:w-80">
@@ -196,30 +196,30 @@ export default function ProductsPage() {
                 placeholder="Search glass name, category..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-11 pr-4 py-3 rounded-2xl text-sm bg-slate-950 border border-slate-700 text-white placeholder-slate-400 focus:outline-none focus:border-teal-400 font-medium"
+                className="w-full pl-11 pr-4 py-3 rounded-2xl text-sm bg-white border border-slate-300 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#8B1E2D] font-medium"
               />
             </div>
 
             {/* Category & Thickness Filter */}
             <div className="flex flex-wrap items-center gap-3 w-full lg:w-auto">
-              <span className="text-sm text-slate-300 flex items-center gap-1.5 font-bold">
-                <Filter className="w-4 h-4 text-teal-400" /> Category:
+              <span className="text-sm text-slate-700 flex items-center gap-1.5 font-bold">
+                <Filter className="w-4 h-4 text-[#8B1E2D]" /> Category:
               </span>
               <select
                 value={selectedCat}
                 onChange={(e) => setSelectedCat(e.target.value)}
-                className="px-4 py-2.5 rounded-2xl text-sm bg-slate-950 border border-slate-700 text-white font-medium focus:outline-none focus:border-teal-400"
+                className="px-4 py-2.5 rounded-2xl text-sm bg-white border border-slate-300 text-slate-900 font-semibold focus:outline-none focus:border-[#8B1E2D]"
               >
                 {CATEGORIES.map((c) => (
                   <option key={c} value={c}>{c}</option>
                 ))}
               </select>
 
-              <span className="text-sm text-slate-300 ml-2 font-bold">Thickness:</span>
+              <span className="text-sm text-slate-700 ml-2 font-bold">Thickness:</span>
               <select
                 value={selectedThickness}
                 onChange={(e) => setSelectedThickness(e.target.value)}
-                className="px-4 py-2.5 rounded-2xl text-sm bg-slate-950 border border-slate-700 text-white font-medium focus:outline-none focus:border-teal-400"
+                className="px-4 py-2.5 rounded-2xl text-sm bg-white border border-slate-300 text-slate-900 font-semibold focus:outline-none focus:border-[#8B1E2D]"
               >
                 {THICKNESS_OPTIONS.map((t) => (
                   <option key={t} value={t}>{t}</option>
@@ -234,43 +234,43 @@ export default function ProductsPage() {
             {filteredProducts.map((p) => (
               <div
                 key={p.id}
-                className="rounded-3xl bg-slate-900 border border-white/10 hover:border-teal-400/50 transition-all p-6 sm:p-7 flex flex-col justify-between hover:shadow-2xl hover:-translate-y-1"
+                className="rounded-3xl bg-white border border-slate-200 hover:border-[#8B1E2D]/40 transition-all p-7 flex flex-col justify-between hover:shadow-hover hover:-translate-y-1"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className="px-3 py-1 rounded-full text-xs font-bold bg-teal-950 text-teal-300 border border-teal-500/40">
+                    <span className="px-3 py-1 rounded-full text-xs font-black bg-red-50 text-[#8B1E2D] border border-red-200">
                       {p.thicknessMm}mm Thickness
                     </span>
-                    <span className="flex items-center gap-1.5 text-xs text-emerald-400 font-bold">
-                      <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                    <span className="flex items-center gap-1.5 text-xs text-emerald-800 font-bold">
+                      <span className="w-2 h-2 rounded-full bg-emerald-700" />
                       <span>{p.availability}</span>
                     </span>
                   </div>
 
-                  <h3 className="text-xl font-bold text-white mb-1.5">{p.name}</h3>
-                  <p className="text-xs sm:text-sm text-teal-400 font-semibold mb-3">{p.category}</p>
+                  <h3 className="text-xl font-bold text-slate-900 mb-1">{p.name}</h3>
+                  <p className="text-xs sm:text-sm text-[#8B1E2D] font-extrabold mb-3">{p.category}</p>
                   
-                  <p className="text-sm text-slate-300 leading-relaxed mb-5">
+                  <p className="text-sm text-slate-600 leading-relaxed mb-5">
                     {p.description}
                   </p>
 
-                  <div className="p-4 rounded-2xl bg-slate-950/80 border border-white/10 space-y-2 mb-5 text-xs sm:text-sm">
-                    <div className="flex justify-between text-slate-300">
-                      <span className="text-slate-400">Dimensions:</span>
-                      <span className="text-white font-semibold">{p.dimensions}</span>
+                  <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-2 mb-5 text-xs sm:text-sm">
+                    <div className="flex justify-between text-slate-600">
+                      <span className="font-medium">Dimensions:</span>
+                      <span className="text-slate-900 font-bold">{p.dimensions}</span>
                     </div>
-                    <div className="flex justify-between text-slate-300">
-                      <span className="text-slate-400">Cut Capabilities:</span>
-                      <span className="text-white font-semibold">Straight Cut &amp; Edge Polished</span>
+                    <div className="flex justify-between text-slate-600">
+                      <span className="font-medium">Cut Capabilities:</span>
+                      <span className="text-slate-900 font-bold">Straight Cut &amp; Edge Polished</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-white/10 flex items-center justify-between">
-                  <span className="text-xs sm:text-sm text-slate-300 font-medium">Custom Sizing Ready</span>
+                <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
+                  <span className="text-xs sm:text-sm text-slate-500 font-semibold">Custom Sizing Ready</span>
                   <Link
                     href={`/quote?product=${encodeURIComponent(p.name)}&thickness=${p.thicknessMm}`}
-                    className="px-5 py-2.5 rounded-xl text-sm font-bold bg-gradient-to-r from-teal-600 to-teal-500 hover:from-teal-500 hover:to-teal-400 text-white transition-all flex items-center gap-2 shadow-md"
+                    className="px-5 py-2.5 rounded-xl text-sm font-extrabold bg-[#8B1E2D] hover:bg-[#68121E] text-white transition-all flex items-center gap-2 shadow-xs"
                   >
                     <span>Request Quote</span>
                     <ArrowRight className="w-4 h-4" />
@@ -282,10 +282,10 @@ export default function ProductsPage() {
           </div>
 
           {filteredProducts.length === 0 && (
-            <div className="p-16 text-center rounded-3xl bg-slate-900 border border-white/10 space-y-3">
-              <Layers className="w-12 h-12 text-slate-500 mx-auto" />
-              <h3 className="text-lg font-bold text-white">No products found matching filters</h3>
-              <p className="text-sm text-slate-400">Try clearing the search query or selecting &quot;All Categories&quot;.</p>
+            <div className="p-16 text-center rounded-3xl bg-slate-50 border border-slate-200 space-y-3">
+              <Layers className="w-12 h-12 text-slate-400 mx-auto" />
+              <h3 className="text-lg font-bold text-slate-900">No products found matching filters</h3>
+              <p className="text-sm text-slate-500">Try clearing the search query or selecting &quot;All Categories&quot;.</p>
             </div>
           )}
 

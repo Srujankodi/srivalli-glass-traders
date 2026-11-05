@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Layers, Phone, Mail, MapPin, Clock, MessageSquare, ShieldCheck, ArrowUpRight } from 'lucide-react';
+import { Layers, Phone, Mail, MapPin, Clock, MessageSquare, ShieldCheck } from 'lucide-react';
 
 export default function PublicFooter() {
   const [address, setAddress] = useState('Shop No. 4, Plot 12, Glass Market, Hyderabad, Telangana 500001');
@@ -32,131 +32,112 @@ export default function PublicFooter() {
   const cleanWaNumber = whatsapp.replace(/[^0-9]/g, '');
 
   return (
-    <footer className="bg-slate-950 text-slate-200 border-t border-teal-500/20 pt-16 pb-12">
+    <footer className="bg-slate-900 text-slate-300 border-t border-slate-800 pt-16 pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-14">
           
-          {/* Col 1: Brand Info */}
+          {/* Brand Col */}
           <div className="space-y-4">
             <div className="flex items-center space-x-3.5">
-              <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-teal-500 to-slate-900 flex items-center justify-center border border-teal-400/40 shadow-sm">
-                <Layers className="w-6 h-6 text-teal-100" />
+              <div className="w-11 h-11 rounded-2xl bg-[#8B1E2D] flex items-center justify-center text-white shadow-md">
+                <Layers className="w-6 h-6 text-white" />
               </div>
               <div>
-                <span className="text-xl sm:text-2xl font-extrabold tracking-tight text-white flex items-center gap-1.5">
-                  Srivalli <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-teal-200">Glass Traders</span>
+                <span className="text-2xl font-extrabold tracking-tight text-white block">
+                  Srivalli
                 </span>
-                <p className="text-xs text-slate-300 font-medium">Hyderabad, Telangana</p>
+                <span className="text-[11px] font-bold tracking-[0.2em] text-[#C2364B] uppercase block">
+                  Glass Traders &bull; Hyderabad
+                </span>
               </div>
             </div>
 
-            <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
-              Your dependable glass trading and custom-cut glass supply partner in Hyderabad. 
+            <p className="text-sm text-slate-400 leading-relaxed">
+              Your dependable commercial glass trading and custom-cut glass supply partner in Hyderabad. 
               Supplying residential, commercial, and interior glass solutions with wholesale price benefits.
             </p>
 
             <div className="pt-2">
-              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-teal-950/80 text-teal-300 border border-teal-500/30">
+              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-red-950/60 text-red-300 border border-red-800/50">
                 <span>GSTIN: {gstin}</span>
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
                 <span>Telangana Intra-State</span>
               </span>
             </div>
           </div>
 
-          {/* Col 2: Navigation Links */}
+          {/* Quick Links */}
           <div>
-            <h3 className="text-sm font-bold uppercase tracking-wider text-white mb-5 flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-teal-400" />
+            <h3 className="text-xs font-black uppercase tracking-widest text-white mb-5 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-[#8B1E2D]" />
               Quick Navigation
             </h3>
-            <ul className="space-y-3 text-sm sm:text-base font-medium">
+            <ul className="space-y-3 text-sm font-semibold">
               <li>
-                <Link href="/" className="text-slate-300 hover:text-teal-300 transition-colors flex items-center gap-1.5">
+                <Link href="/" className="text-slate-400 hover:text-white transition-colors">
                   Home Overview
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-slate-300 hover:text-teal-300 transition-colors flex items-center gap-1.5">
+                <Link href="/about" className="text-slate-400 hover:text-white transition-colors">
                   About Our Business
                 </Link>
               </li>
               <li>
-                <Link href="/products" className="text-slate-300 hover:text-teal-300 transition-colors flex items-center gap-1.5">
+                <Link href="/products" className="text-slate-400 hover:text-white transition-colors">
                   Glass Product Catalog
                 </Link>
               </li>
               <li>
-                <Link href="/quote" className="text-slate-300 hover:text-teal-300 transition-colors flex items-center gap-1.5">
+                <Link href="/quote" className="text-slate-400 hover:text-white transition-colors">
                   Request a Custom Quote
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-slate-300 hover:text-teal-300 transition-colors flex items-center gap-1.5">
+                <Link href="/contact" className="text-slate-400 hover:text-white transition-colors">
                   Contact &amp; Shop Location
                 </Link>
               </li>
               <li>
-                <Link href="/login" className="text-teal-300 hover:text-teal-200 transition-colors flex items-center gap-1.5 font-bold pt-1">
+                <Link href="/login" className="text-[#C2364B] hover:text-red-300 transition-colors flex items-center gap-1.5 font-bold pt-1">
                   <ShieldCheck className="w-4 h-4" /> Internal Staff ERP
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Col 3: Product Types */}
+          {/* Glass Products */}
           <div>
-            <h3 className="text-sm font-bold uppercase tracking-wider text-white mb-5 flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-teal-400" />
+            <h3 className="text-xs font-black uppercase tracking-widest text-white mb-5 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-[#8B1E2D]" />
               Glass Products
             </h3>
-            <ul className="space-y-2.5 text-sm sm:text-base text-slate-300">
-              <li className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-teal-400/60" />
-                <span>Clear Float Glass (3mm - 19mm)</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-teal-400/60" />
-                <span>Toughened Structural Glass</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-teal-400/60" />
-                <span>Bronze &amp; Grey Tinted Glass</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-teal-400/60" />
-                <span>Acid Etched Frosted Glass</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-teal-400/60" />
-                <span>Laminated Acoustic Glass</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-teal-400/60" />
-                <span>High-Definition Mirror Glass</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-teal-400/60" />
-                <span>Custom Reusable Remnants</span>
-              </li>
+            <ul className="space-y-2.5 text-sm text-slate-400 font-medium">
+              <li>Clear Float Glass (3mm – 19mm)</li>
+              <li>Toughened Structural Glass</li>
+              <li>Bronze &amp; Grey Tinted Glass</li>
+              <li>Acid Etched Frosted Glass</li>
+              <li>Laminated Acoustic Glass</li>
+              <li>High-Definition Mirror Glass</li>
+              <li>Reusable Remnant Salvage</li>
             </ul>
           </div>
 
-          {/* Col 4: Contact & Depot */}
+          {/* Depot & Workshop */}
           <div>
-            <h3 className="text-sm font-bold uppercase tracking-wider text-white mb-5 flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-teal-400" />
+            <h3 className="text-xs font-black uppercase tracking-widest text-white mb-5 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-[#8B1E2D]" />
               Depot &amp; Workshop
             </h3>
-            <ul className="space-y-3.5 text-sm sm:text-base text-slate-300">
+            <ul className="space-y-3.5 text-sm text-slate-400">
               <li className="flex items-start space-x-3">
-                <MapPin className="w-5 h-5 text-teal-400 shrink-0 mt-0.5" />
+                <MapPin className="w-5 h-5 text-[#8B1E2D] shrink-0 mt-0.5" />
                 <span className="leading-snug">
                   {address}
                 </span>
               </li>
               <li className="flex items-center space-x-3">
-                <Phone className="w-5 h-5 text-teal-400 shrink-0" />
+                <Phone className="w-5 h-5 text-[#8B1E2D] shrink-0" />
                 <a href={`tel:${phone.replace(/[^0-9+]/g, '')}`} className="hover:text-white font-semibold transition-colors">
                   {phone}
                 </a>
@@ -173,14 +154,14 @@ export default function PublicFooter() {
                 </a>
               </li>
               <li className="flex items-center space-x-3">
-                <Mail className="w-5 h-5 text-teal-400 shrink-0" />
+                <Mail className="w-5 h-5 text-[#8B1E2D] shrink-0" />
                 <a href={`mailto:${email}`} className="hover:text-white transition-colors">
                   {email}
                 </a>
               </li>
               <li className="flex items-start space-x-3">
-                <Clock className="w-5 h-5 text-teal-400 shrink-0 mt-0.5" />
-                <span className="text-xs sm:text-sm text-slate-300 leading-normal">
+                <Clock className="w-5 h-5 text-[#8B1E2D] shrink-0 mt-0.5" />
+                <span className="text-xs text-slate-400 leading-normal">
                   {businessHours}
                 </span>
               </li>
@@ -189,7 +170,7 @@ export default function PublicFooter() {
 
         </div>
 
-        <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs sm:text-sm text-slate-300 gap-4">
+        <div className="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
           <p>&copy; {new Date().getFullYear()} Srivalli Glass Traders. All rights reserved.</p>
           <p className="flex items-center gap-1.5">
             Hyderabad Wholesale Glass &bull; Precision Cut-to-Size

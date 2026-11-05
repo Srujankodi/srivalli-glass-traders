@@ -25,7 +25,6 @@ export default function HeroQuickCalculator() {
       sqFt = (l * w) / 92903.04;
     }
 
-    // Indicative benchmark rates in Hyderabad
     let rate = 58;
     if (glassType.includes('Toughened')) rate = 115;
     else if (glassType.includes('Tinted')) rate = 72;
@@ -43,35 +42,34 @@ export default function HeroQuickCalculator() {
   }, [length, width, unit, glassType, thickness]);
 
   return (
-    <div className="relative mx-auto w-full max-w-lg rounded-3xl bg-slate-900/90 border border-teal-500/30 p-6 sm:p-7 shadow-2xl backdrop-blur-xl">
-      {/* Decorative Glow */}
-      <div className="absolute -top-10 -right-10 w-40 h-40 bg-teal-500/10 rounded-full blur-2xl pointer-events-none" />
-      
-      <div className="flex items-center justify-between pb-4 mb-4 border-b border-white/10">
-        <div className="flex items-center gap-2.5">
-          <div className="w-9 h-9 rounded-xl bg-teal-500/20 border border-teal-400/30 flex items-center justify-center text-teal-300">
+    <div className="w-full max-w-xl mx-auto rounded-3xl bg-white border border-slate-200/90 p-6 sm:p-8 shadow-card">
+      <div className="flex items-center justify-between pb-4 mb-5 border-b border-slate-100">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-2xl bg-red-50 text-[#8B1E2D] flex items-center justify-center font-bold">
             <Calculator className="w-5 h-5" />
           </div>
           <div>
-            <h3 className="text-base sm:text-lg font-bold text-white">Instant Size Estimator</h3>
-            <p className="text-xs text-slate-300">Enter dimensions to calculate square feet</p>
+            <h3 className="text-lg font-bold text-slate-900">Instant Glass Sizing &amp; Pricing</h3>
+            <p className="text-xs text-slate-700">Enter custom measurements to calculate square feet</p>
           </div>
         </div>
-        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-          <Sparkles className="w-3 h-3" /> Live
+        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-red-50 text-[#8B1E2D] border border-red-200">
+          <Sparkles className="w-3.5 h-3.5" /> Direct Wholesale
         </span>
       </div>
 
       <div className="space-y-4">
         {/* Glass Type & Thickness */}
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
           <div>
-            <label className="block text-xs font-semibold text-slate-200 mb-1.5">Glass Type</label>
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-800 mb-1.5">
+              Glass Variety
+            </label>
             <select
               value={glassType}
               onChange={(e) => setGlassType(e.target.value)}
-              aria-label="Select Glass Type"
-              className="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-xs sm:text-sm text-white focus:outline-none focus:border-teal-400 font-medium"
+              aria-label="Select Glass Variety"
+              className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 font-semibold focus:outline-none focus:border-[#8B1E2D] focus:bg-white"
             >
               <option value="Clear Float Glass">Clear Float Glass</option>
               <option value="Toughened Glass">Toughened Glass</option>
@@ -82,12 +80,14 @@ export default function HeroQuickCalculator() {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-200 mb-1.5">Thickness</label>
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-800 mb-1.5">
+              Thickness
+            </label>
             <select
               value={thickness}
               onChange={(e) => setThickness(e.target.value)}
-              aria-label="Select Thickness"
-              className="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-xs sm:text-sm text-white focus:outline-none focus:border-teal-400 font-medium"
+              aria-label="Select Glass Thickness"
+              className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 font-semibold focus:outline-none focus:border-[#8B1E2D] focus:bg-white"
             >
               <option value="5mm">5mm Standard</option>
               <option value="8mm">8mm Medium</option>
@@ -100,15 +100,17 @@ export default function HeroQuickCalculator() {
         {/* Dimension Unit Selector */}
         <div>
           <div className="flex justify-between items-center mb-1.5">
-            <label className="text-xs font-semibold text-slate-200">Measurement Unit</label>
-            <div className="flex gap-1 bg-slate-800 p-0.5 rounded-lg border border-slate-700 text-xs">
+            <label className="text-xs font-bold uppercase tracking-wider text-slate-800">
+              Dimensions &amp; Unit
+            </label>
+            <div className="flex gap-1 bg-slate-100 p-0.5 rounded-lg border border-slate-200 text-xs">
               {(['ft', 'in', 'mm'] as const).map((u) => (
                 <button
                   key={u}
                   type="button"
                   onClick={() => setUnit(u)}
-                  className={`px-2.5 py-0.5 rounded font-semibold transition-colors ${
-                    unit === u ? 'bg-teal-600 text-white shadow-xs' : 'text-slate-400 hover:text-white'
+                  className={`px-3 py-1 rounded font-bold transition-all ${
+                    unit === u ? 'bg-[#8B1E2D] text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
                   }`}
                 >
                   {u.toUpperCase()}
@@ -117,70 +119,66 @@ export default function HeroQuickCalculator() {
             </div>
           </div>
 
-          {/* Length & Width Inputs */}
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <div className="relative">
-                <input
-                  type="number"
-                  step="any"
-                  value={length}
-                  onChange={(e) => setLength(e.target.value)}
-                  placeholder="Length"
-                  aria-label="Length dimension"
-                  className="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white font-bold focus:outline-none focus:border-teal-400"
-                />
-                <span className="absolute right-3 top-2.5 text-xs text-slate-400 font-semibold uppercase">{unit}</span>
-              </div>
+          {/* Length & Width */}
+          <div className="grid grid-cols-2 gap-3.5">
+            <div className="relative">
+              <input
+                type="number"
+                step="any"
+                value={length}
+                onChange={(e) => setLength(e.target.value)}
+                placeholder="Length"
+                aria-label="Length measurement"
+                className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-900 font-bold focus:outline-none focus:border-[#8B1E2D] focus:bg-white"
+              />
+              <span className="absolute right-3.5 top-3 text-xs text-slate-600 font-bold uppercase">{unit}</span>
             </div>
-            <div>
-              <div className="relative">
-                <input
-                  type="number"
-                  step="any"
-                  value={width}
-                  onChange={(e) => setWidth(e.target.value)}
-                  placeholder="Width"
-                  aria-label="Width dimension"
-                  className="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white font-bold focus:outline-none focus:border-teal-400"
-                />
-                <span className="absolute right-3 top-2.5 text-xs text-slate-400 font-semibold uppercase">{unit}</span>
-              </div>
+            <div className="relative">
+              <input
+                type="number"
+                step="any"
+                value={width}
+                onChange={(e) => setWidth(e.target.value)}
+                placeholder="Width"
+                aria-label="Width measurement"
+                className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-900 font-bold focus:outline-none focus:border-[#8B1E2D] focus:bg-white"
+              />
+              <span className="absolute right-3.5 top-3 text-xs text-slate-600 font-bold uppercase">{unit}</span>
             </div>
           </div>
         </div>
 
-        {/* Results Banner */}
-        <div className="rounded-2xl bg-teal-950/70 border border-teal-500/40 p-4">
+        {/* Results Banner in Red-tinted card matching Genesis theme */}
+        <div className="rounded-2xl bg-red-50/70 border border-red-200/80 p-4 sm:p-5">
           <div className="flex justify-between items-center">
             <div>
-              <span className="text-xs text-teal-200 font-medium">Calculated Glass Area</span>
-              <div className="text-2xl font-black text-white tracking-tight">
-                {totalSqFt} <span className="text-sm font-semibold text-teal-300">sq ft</span>
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-700">Calculated Glass Area</span>
+              <div className="text-3xl font-black text-[#8B1E2D] tracking-tight">
+                {totalSqFt} <span className="text-base font-bold text-slate-700">sq ft</span>
               </div>
             </div>
             <div className="text-right">
-              <span className="text-xs text-teal-200 font-medium">Est. Material Rate</span>
-              <div className="text-xl font-extrabold text-teal-200">
-                ₹{indicativeRate} <span className="text-xs font-normal text-teal-300">/ sq ft</span>
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-700">Indicative Rate</span>
+              <div className="text-2xl font-black text-slate-900">
+                ₹{indicativeRate} <span className="text-xs font-medium text-slate-700">/ sq ft</span>
               </div>
             </div>
           </div>
-          <div className="mt-2 pt-2 border-t border-teal-500/30 flex items-center justify-between text-xs text-teal-300">
-            <span className="flex items-center gap-1 font-medium">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-              Millimeter Cutting Tolerance
+          <div className="mt-3 pt-3 border-t border-red-200/60 flex items-center justify-between text-xs text-slate-700 font-medium">
+            <span className="flex items-center gap-1.5 text-emerald-800 font-bold">
+              <CheckCircle2 className="w-4 h-4 text-emerald-700" />
+              Millimeter Straight Cutting
             </span>
-            <span className="text-slate-300 font-mono">Hyderabad Wholesale</span>
+            <span className="font-bold text-[#8B1E2D]">Telangana Wholesale</span>
           </div>
         </div>
 
-        {/* Button to Formal Quotation */}
+        {/* Action Button */}
         <Link
           href={`/quote?product=${encodeURIComponent(glassType)}&thickness=${thickness.replace('mm','')}&length=${length}&width=${width}&unit=${unit}`}
-          className="w-full py-3 rounded-xl font-bold text-sm text-white bg-gradient-to-r from-teal-600 via-teal-500 to-emerald-600 hover:from-teal-500 hover:to-emerald-500 shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
+          className="w-full py-4 rounded-xl font-extrabold text-sm sm:text-base text-white bg-[#8B1E2D] hover:bg-[#68121E] shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
         >
-          <span>Get Detailed Official Quote</span>
+          <span>Request Official Quote For This Size</span>
           <ArrowRight className="w-4 h-4" />
         </Link>
       </div>
